@@ -1,50 +1,50 @@
-# Fraud NET (fraud-net)
-The Fraud.net API allows you to obtain critical insight into the validity of a
-Cart (pre-authorization, e-commerce) or a Transaction. To mitigate fraud, we
-require data on a Cart and/or a Transaction. Data is shared via our Check and
-Update API requests. 
+# Fraud.net (fraud-net)
 
-**URL:** [Visit APIs.json URL](
-https://raw.githubusercontent.com/api-search/fraud-net/refs/heads/main/apis.yml)
+Fraud.net provides AI-driven fraud prevention and risk management APIs. The Public API offers pre-authorization Cart Check, Transaction Check, post-event Update, and supporting device, identity, and email risk signals powered by the Collective Intelligence Network.
+
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Contract 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - Fraud, Commerce
+- Fraud, Risk, Commerce, Payments, Security
 
 ## Timestamps
 
-- **Created:** 2024-11-13 
-- **Modified:** 2024-12-30 
+- **Created:** 2024-11-13
+- **Modified:** 2026-04-28
 
 ## APIs
 
-### Fraud NET
+### Fraud.net Public API
 
-The Fraud.net API allows you to obtain critical insight into the validity
-of a Cart (pre-authorization, e-commerce) or a Transaction. To mitigate
-fraud, we require data on a Cart and/or a Transaction. Data is shared via
-our Check and Update API requests. 
+Public API for evaluating cart and transaction risk pre-authorization and submitting post-event signals for model improvement, plus device, identity, and email risk endpoints.
 
-**Human URL:** [ https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation]( https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation)
+- **Human URL:** https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
 
+#### Tags
 
-#### Tags:
-
- - API
+- Fraud, Risk, Cart, Transaction
 
 #### Properties
 
-- [Documentation]( https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation)
+- [Documentation](https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation)
+- [Capabilities](https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/capabilities/fraud-net-capabilities.yml)
+- [Rules](https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml)
+
+## Common Properties
+
+- [Website](https://fraud.net/)
+- [Documentation](https://api-docs.fraud.net/)
+- [SignUp](https://fraud.net/contact/)
 
 ## Maintainers
 
 **FN:** Kin Lane
 
-**Email:** info@apievangelist.com
-
+**Email:** kin@apievangelist.com

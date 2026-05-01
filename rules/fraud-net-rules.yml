@@ -1,0 +1,70 @@
+aid: fraud-net:rules
+name: Fraud.net API Operational Rules
+description: >-
+  Operational rules for using the Fraud.net public APIs covering
+  authentication, payload completeness, decisioning semantics, and
+  post-event update obligations.
+modified: '2026-04-28'
+rules:
+  - id: api-key-required
+    title: API Key Required
+    description: >-
+      All public API requests must be authenticated using a Fraud.net
+      issued API key. Keep keys server-side and rotate on suspicion of
+      compromise.
+    severity: required
+  - id: pre-auth-timing
+    title: Pre-Authorization Timing
+    description: >-
+      Cart Check should be invoked before payment authorization so the
+      decision can influence whether the transaction proceeds. Calling
+      after authorization reduces decisioning value.
+    severity: recommended
+  - id: payload-completeness
+    title: Payload Completeness
+    description: >-
+      Send all available shopper, device, billing, shipping, and product
+      fields. The model accuracy and resulting score quality depend on
+      payload completeness.
+    severity: required
+  - id: device-data
+    title: Include Device Data
+    description: >-
+      Where possible attach device fingerprint and IP context using the
+      Fraud.net Device API or SDK. Missing device data significantly
+      degrades signal strength.
+    severity: recommended
+  - id: idempotent-updates
+    title: Idempotent Updates
+    description: >-
+      Update events (chargeback, fulfillment, disposition) should be
+      idempotent on the client side; resending the same event must not
+      produce duplicate effects.
+    severity: required
+  - id: pii-handling
+    title: PII Handling
+    description: >-
+      Cart and transaction payloads contain regulated personal data and
+      payment identifiers; transmit over TLS only and store responses
+      according to your data retention policy.
+    severity: required
+  - id: post-event-feedback
+    title: Send Post-Event Feedback
+    description: >-
+      Sending post-event signals (chargebacks, manual review outcomes,
+      fulfillment) is essential to model retraining and is a contractual
+      expectation for many plans.
+    severity: required
+  - id: rate-limits
+    title: Rate Limits
+    description: >-
+      Plan-specific request rate limits apply; implement exponential
+      backoff and circuit breaking for HTTP 429 responses.
+    severity: required
+  - id: response-codes
+    title: Decision Response Handling
+    description: >-
+      Map Fraud.net decision codes (approve, decline, review) to your
+      payment flow consistently. Treat unknown codes as review and
+      escalate.
+    severity: required
