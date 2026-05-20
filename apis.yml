@@ -43,6 +43,10 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
 common:
+  - type: GitHubOrganization
+    url: https://github.com/fraudnet
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/fraud-net
   - type: Website
     url: https://fraud.net/
   - type: Documentation
