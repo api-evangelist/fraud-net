@@ -51,7 +51,7 @@ common:
     url: https://fraud.net/
   - type: Documentation
     url: https://api-docs.fraud.net/
-  - type: SignUp
+  - type: Signup
     url: https://fraud.net/contact/
 maintainers:
   - FN: Kin Lane
