@@ -6,7 +6,19 @@ description: >-
   post-event Update, and supporting device, identity, and email risk
   signals powered by the Collective Intelligence Network.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fraud-net.png
 access: 3rd-Party
 created: '2024-11-13'
 modified: '2026-04-28'
