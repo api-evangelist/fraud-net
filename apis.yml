@@ -31,7 +31,7 @@ tags:
   - Security
 url: >-
   https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: fraud-net:public-api
     name: Fraud.net Public API
