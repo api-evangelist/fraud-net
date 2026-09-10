@@ -1,0 +1,54 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  openapi/fraud-net-public-apis-openapi.json (host + schemes) and
+  https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+provider: Fraud.net
+providerId: fraud-net
+sandbox:
+  exists: true
+  base_url: https://api-sandbox.c008-m008-us.fraud.net
+  evidence: >-
+    The ONLY host declared in Fraud.net's published Swagger 2.0 contract is
+    api-sandbox.c008-m008-us.fraud.net over https. The public API reference therefore
+    documents the sandbox environment, not production.
+  self_service: false
+  anonymous_access: false
+test_vs_live:
+  separation: environment-host
+  key_prefixes: []
+  modes: []
+  note: >-
+    Separation is by HOST, not by key prefix or a test/live mode flag. There is no
+    published production host: the naming (c008-m008-us) shows per-cluster, per-region
+    deployment, and the status page confirms Fraud.net operates separate US, Canada, EU,
+    UK/Australia, UAE, Bahrain and Singapore stacks. A customer's production base URL is
+    issued during onboarding and is not published anywhere public.
+credentials:
+  self_service_signup: false
+  how_obtained: >-
+    "You can find or generate your API key in the Developer section of the Fraud.net
+    Case Management Portal." The portal is reached after commercial onboarding
+    (https://www.fraud.net/demo-request).
+  published_test_credentials: none
+  note: >-
+    NO test credentials, test cards, magic identifiers or fixture values are published.
+    An anonymous request to the sandbox host returns 403 {"message":"Forbidden"} from AWS
+    API Gateway (probed 2026-09-10).
+magic_values: []
+test_clocks: false
+fixtures_and_triggers: []
+mock_server:
+  url: https://stoplight.io/mocks/fraudnet/public-apis/28825911
+  status: gated
+  evidence: >-
+    The provider's Stoplight project exposes a Prism mock URL in its node metadata, but a
+    POST to https://stoplight.io/mocks/fraudnet/public-apis/28825911/v2/risk/order/ecommerce
+    returned HTTP 401 (probed 2026-09-10). Unlike most Stoplight mocks it is not
+    anonymously callable, so it is NOT recorded as a usable sandbox surface.
+gaps:
+  - >-
+    The single largest developer-experience gap on this API: the whole contract is
+    public and well-formed, but nothing in it can be exercised without a sales-issued
+    key, and no production host is ever named. A prospective integrator can read the
+    API but cannot call it, and cannot even see where production lives.

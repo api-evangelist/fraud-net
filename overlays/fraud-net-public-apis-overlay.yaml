@@ -1,0 +1,59 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Fraud.net Public API
+  version: 1.0.0
+extends: openapi/fraud-net-public-apis-openapi.json
+x-provenance:
+  generated: '2026-09-10'
+  method: generated
+  source: >-
+    Harvested from the provider's Stoplight project export
+    (https://stoplight.io/api/v1/projects/fraudnet/public-apis/nodes/reference/public%20apis.oas2.json).
+    This overlay records API Evangelist observations ONLY; the harvested contract is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/fraud-net/
+      x-apievangelist-harvested: '2026-09-10'
+      x-apievangelist-source: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
+      x-apievangelist-spec-version: swagger-2.0
+      x-apievangelist-note: >-
+        The only host declared is a SANDBOX host (api-sandbox.c008-m008-us.fraud.net).
+        No production base URL is published; production is per-tenant and per-region.
+  - target: $.securityDefinitions
+    update:
+      x-apievangelist-observation: >-
+        The document's global `security` requirement names `new-auth`, but the only scheme
+        defined here is `basic-auth`. That is a dangling security reference in the
+        published contract. The narrative documentation states HTTP Basic unambiguously.
+  - target: $.responses['trait:responseApi:409']
+    update:
+      x-apievangelist-idempotency: >-
+        This is Fraud.net's replay protection — duplicate rejection on the natural key
+        order_id. It rejects rather than replays, so a retried write returns 409 and not
+        the original risk score. Coverage is partial: 9 of 13 operations declare it.
+  - target: $.responses['trait:updateResponseApi:409']
+    update:
+      x-apievangelist-idempotency: >-
+        Update-surface replay protection, keyed on the pair (order_id, updated_on).
+  - target: $.paths['/v2/account/login'].post
+    update:
+      x-apievangelist-spec-gap: >-
+        Declares only a 200 response. No 401/403/406/409/5xx is documented for this
+        operation even though the shared response traits exist in the same document.
+  - target: $.paths['/v2/risk/account/loan'].post
+    update:
+      x-apievangelist-spec-gap: Declares only a 200 response; error traits not applied.
+  - target: $.paths['/v2/risk/transaction/account_application'].post
+    update:
+      x-apievangelist-spec-gap: Declares only a 200 response; error traits not applied.
+  - target: $.paths['/v2/risk/transaction/banking_marketplace'].post
+    update:
+      x-apievangelist-spec-gap: >-
+        Declares 401/403/404/406/5xx but omits 409, unlike every other Check operation.
+  - target: $.tags
+    update:
+      x-apievangelist-observation: >-
+        Five tags are declared (Banking / Fintech, Commerce, Bank, Loan, Identity) but
+        only three are used by operations; `Bank` and `Loan` are declared and never
+        applied.

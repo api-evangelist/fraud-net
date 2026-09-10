@@ -1,0 +1,85 @@
+generated: '2026-09-10'
+method: derived
+status: candidate
+source: openapi/fraud-net-public-apis-openapi.json
+provider: Fraud.net
+providerId: fraud-net
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+  note: >-
+    Fraud.net ships NO MCP server. Searched the provider's documentation, llms.txt,
+    release notes (six years, December 2020 - August 2026), the github.com/fraudnet
+    organisation and the npm registry; nothing. The tool list below is a CANDIDATE
+    derived from the published Swagger 2.0 operations so the surface is legible to an
+    agent, not a server anyone can call. No endpoint URL is invented.
+server:
+  name: fraud-net
+  transport: null
+  url: null
+auth_model:
+  scheme: http-basic
+  note: >-
+    Any future server would carry a single Basic credential per tenant; there is no
+    OAuth, no scopes and no per-tool permission model to map.
+tools:
+  - name: check_bank_transaction
+    description: Score a banking or payment-processor transaction for fraud risk before authorization.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#check-transaction-bank
+    consequence: write
+  - name: update_bank_transaction
+    description: Relay a status, disposition or chargeback change for a previously checked bank transaction.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#update-bank-transaction
+    consequence: write
+  - name: check_ecommerce_order
+    description: Score an ecommerce order for fraud risk before payment authorization.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#POST_v2-risk-order-ecommerce
+    consequence: write
+  - name: update_order
+    description: Relay an order status or fraud disposition change back to Fraud.net.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#PATCH_risk-order
+    consequence: write
+  - name: check_marketplace_order
+    description: Score a marketplace order, including seller context, for fraud risk.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#POST_v2-risk-order-marketplace
+    consequence: write
+  - name: check_travel_order
+    description: Score a travel booking (passengers, tickets, carriers, hubs) for fraud risk.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#POST_travel-check
+    consequence: write
+  - name: check_account_application
+    description: Score a new account application for identity and application fraud.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#POST_v2-transaction-account-application
+    consequence: write
+  - name: update_account_application
+    description: Relay an account application decision or fraud disposition.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#PATCH_v2-transaction-account-application
+    consequence: write
+  - name: check_account_login
+    description: Score an account login attempt for account-takeover risk.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#POST_v2-account-login
+    consequence: write
+  - name: check_loan_application
+    description: Score a loan application, applicant and credit-bureau context for risk.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#POST_v2-risk-account-loan
+    consequence: write
+  - name: update_loan_application
+    description: Relay a loan status, approval amount, payment status or fraud disposition.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#PATCH_v2-risk-account-loan
+    consequence: write
+  - name: check_banking_marketplace_transaction
+    description: Score a banking-marketplace transaction with counterparty and intermediary bank context.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#post-v2-risk-transaction-banking_marketplace
+    consequence: write
+  - name: update_banking_marketplace_transaction
+    description: Relay a banking-marketplace transaction status or disposition change.
+    source_operation: openapi/fraud-net-public-apis-openapi.json#patch-v2-risk-transaction-banking_marketplace
+    consequence: write
+agent_notes:
+  - Every tool is a WRITE. There is no read/list/get operation in this API at all, so an agent cannot look a record up after creating it — it can only follow `data.link` into the portal.
+  - Replay protection is 409-on-duplicate keyed on order_id (and order_id + updated_on for updates). Treat a 409 as "already recorded", never as a retryable failure.
+  - No reversal, cancel or delete exists. A Check cannot be withdrawn; only fields on the record can be amended by a later Update.

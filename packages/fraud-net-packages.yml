@@ -1,0 +1,59 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  Registry searches (npm, PyPI, RubyGems, crates.io, Packagist, GitHub org
+  github.com/fraudnet) plus the provider's own Device Fingerprint SDK quick-start
+  article at https://api-docs.fraud.net/docs/public-apis/ZG9jOjI3MTE5MDAx-device-fingerprint
+provider: Fraud.net
+providerId: fraud-net
+note: >-
+  Fraud.net publishes ONE first-party client library and it is not in a package
+  registry: the browser Device Fingerprint SDK, distributed as a versioned script
+  from its own CDN (media.fraud.net). No first-party server-side SDK was found on
+  npm, PyPI, RubyGems, crates.io, Packagist, Maven Central or NuGet, and the
+  github.com/fraudnet organisation holds only Terraform/AWS infrastructure modules
+  and forks — no API client. Server-side integration is hand-rolled HTTP with Basic
+  auth against the Public API.
+packages:
+  - language: javascript
+    registry: cdn
+    name: fn_device_fingerprint_sdk
+    url: https://media.fraud.net/v0.0.1/fn_device_fingerprint_sdk.js
+    install: >-
+      <script>(function(a,b,c,e,d){c[a]=c[a]||[];var g=e.getElementsByTagName(d)[0],
+      f=e.createElement(d);f.async=!0,f.src="https://media.fraud.net/v"+b+"/fn_device_fingerprint_sdk.js?l="+a,
+      f.id="fndfsid",g.parentNode.insertBefore(f,g)})("fn_device_fingerprint_sdk","0.0.1",window,document,"script");</script>
+    official: true
+    version: 0.0.1
+    published: '2021-01-04'
+    published_source: >-
+      Last-Modified header on https://media.fraud.net/v0.0.1/fn_device_fingerprint_sdk.js
+      (HTTP 200, application/javascript, 117722 bytes, probed 2026-09-10)
+    note: >-
+      CDN-distributed, no package-registry metadata endpoint exists. The version is
+      pinned in the loader snippet the provider publishes (the "0.0.1" argument builds
+      the /v0.0.1/ path), so a consumer can tell exactly what they are getting. The
+      asset's Last-Modified is 2021-01-04 and the version string has not moved off
+      0.0.1 — the strongest decay signal available for this provider's client tooling.
+  - language: php
+    registry: packagist
+    name: solution25/fraud-net
+    url: https://packagist.org/packages/solution25/fraud-net
+    install: composer require solution25/fraud-net
+    official: false
+    version: 1.1.0
+    published: '2026-08-06'
+    published_source: https://repo.packagist.org/packages/solution25/fraud-net.json
+    repository: https://github.com/solution25com/fraud-net-shopware-6-solution25
+    note: >-
+      THIRD PARTY, not Fraud.net. A Shopware 6 plugin by Solution25 that submits placed
+      orders to the Fraud.net risk API and persists the returned risk score. Listed here
+      because it is the only maintained community client for this API; do not credit it
+      to the provider.
+registries_checked:
+  - {registry: npm, query: 'fraud.net / fraudnet / fraud-net', result: no first-party package}
+  - {registry: pypi, query: 'fraudnet / fraud-net / fraud_net', result: 404 on all}
+  - {registry: rubygems, query: 'fraudnet / fraud-net', result: 404 on all}
+  - {registry: crates.io, query: 'fraudnet / fraud-net', result: 404 on all}
+  - {registry: packagist, query: 'fraud-net', result: one third-party package (solution25/fraud-net)}
+  - {registry: github, query: 'github.com/fraudnet', result: 6 repos, all AWS/Terraform infrastructure or forks}

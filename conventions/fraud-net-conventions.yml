@@ -1,0 +1,149 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  and openapi/fraud-net-public-apis-openapi.json
+provider: Fraud.net
+providerId: fraud-net
+authentication:
+  style: http-basic
+  header: 'Authorization: Basic <base64(key:secret)>'
+  detail: authentication/fraud-net-authentication.yml
+  key_issuance: Developer section of the Fraud.net Case Management Portal
+request:
+  media_type: application/json
+  encoding: application/json
+  method_semantics:
+    POST: >-
+      "Check" — submit an order, transaction, loan application, account application or
+      login for real-time risk scoring. Creates the record in Fraud.net.
+    PATCH: >-
+      "Update" — relay an outcome or status change for a record already created by a
+      Check. Partial semantics: "PATCH requests update only the fields explicitly
+      included, leaving all omitted fields unchanged." Send a field with a new value to
+      change it, send an empty string to CLEAR it, omit it to leave it alone.
+  correlation_key: order_id
+  correlation_note: >-
+    order_id is the client-supplied natural key that ties an Update back to its Check.
+    An Update whose order_id was never Checked returns 404.
+response:
+  media_type: application/json
+  envelope:
+    success: boolean
+    data: object
+  check_result_fields:
+    id: Your order ID, echoed back
+    timer: Time to calculate the API response, in milliseconds
+    risk_score: 'Integer 0-100 — 0 low risk, 100 high risk'
+    risk_group: 'Enum: very low | low | medium | high | very high'
+    link: Link to order details on the Fraud.net portal
+    tags: 'Array of rule/model tags (id, action, name, source, type, state, weight, risk_score, risk_group, link)'
+  latency_claim: >-
+    "The platform operates in under 100 milliseconds for transaction scoring"
+    (https://www.fraud.net/llms.txt). The response carries the measured value in `timer`.
+idempotency:
+  coverage: partial
+  mechanism: natural-key-duplicate-rejection
+  header: null
+  scope:
+    - check-transaction-bank
+    - update-bank-transaction
+    - POST_v2-risk-order-ecommerce
+    - PATCH_risk-order
+    - POST_v2-risk-order-marketplace
+    - POST_travel-check
+    - PATCH_v2-transaction-account-application
+    - PATCH_v2-risk-account-loan
+    - patch-v2-risk-transaction-banking_marketplace
+  detail: >-
+    There is NO Idempotency-Key header. Replay protection is enforced on a natural key
+    and surfaces as HTTP 409: on the Check surface the unique key is `order_id`
+    ("duplicate order_id, this order is already in our system"); on the Update surface it
+    is the pair `order_id` + `updated_on` ("duplicate update, unique check done via
+    order_id and updated_on"). 9 of the 13 published operations declare 409; the four
+    that do not (POST_v2-transaction-account-application, POST_v2-account-login,
+    POST_v2-risk-account-loan, post-v2-risk-transaction-banking_marketplace) declare no
+    error responses at all, which is a spec gap rather than a documented absence of the
+    behaviour — hence `partial`, not `full`.
+  replay_semantics: >-
+    A duplicate is REJECTED with 409, not replayed with the original result. A client
+    that times out and retries therefore learns the write landed but does not get the
+    original risk_score back; it must read the record in the portal or via the `link`.
+    Agents should treat 409 as "already recorded", never as a failure to retry.
+  client_obligation: >-
+    The provider's operational rules state that Update events (chargeback, fulfillment,
+    disposition) "should be idempotent on the client side; resending the same event must
+    not produce duplicate effects" — see rules/fraud-net-rules.yml#idempotent-updates.
+    That is an obligation placed on the consumer, not a server guarantee.
+reversibility:
+  grade: documented
+  applicable: true
+  detail: >-
+    There is no cancel, void, delete, refund or undo operation anywhere in the published
+    contract. What exists is amendment: the PATCH Update operations can correct or clear
+    any field a prior Check or Update set — "To clear a value, send it as an empty
+    string (fraud_type: "")" — including the disposition fields is_fraud, fraud_type,
+    is_locked, status, cancelled_reason and payment_status. A submitted Check itself
+    cannot be withdrawn; the record persists and feeds model training.
+  operations:
+    - reversal: amend-or-clear-fields
+      operationIds: [PATCH_risk-order, update-bank-transaction, PATCH_v2-transaction-account-application, PATCH_v2-risk-account-loan, patch-v2-risk-transaction-banking_marketplace]
+      docs: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+      window: null
+      window_note: >-
+        NO window is published. The documentation states no time limit on how late an
+        Update may arrive, and states no retention or expiry after which a record can no
+        longer be amended. Not asserted, because the provider does not state it.
+    - reversal: none
+      applies_to: Check operations (POST)
+      note: >-
+        No operation removes a submitted Check. Deleting a record is a portal/support
+        action, not an API one.
+  grade_basis: >-
+    `documented` rather than `verified`: a reversal path exists and is documented, but no
+    window is stated anywhere in the public documentation.
+pagination:
+  style: none
+  detail: >-
+    Every published operation is a single-record write returning a single result. There
+    is no list or search operation in the public contract, so there is nothing to
+    paginate.
+filtering_expansion:
+  sparse_fields: false
+  expansion: false
+  detail: Not offered. The response shape is fixed.
+metadata:
+  custom_fields: >-
+    "Typically, Fraud.net can accommodate requests to include customer-specific API
+    variables" — provider documentation. Customer-specific fields are negotiated, not
+    self-service, and are not in the public contract.
+request_tracing:
+  request_id_header: null
+  detail: >-
+    No request-id or correlation header is published. The client-supplied `order_id` and
+    the returned `link` to the portal record are the only tracing handles.
+versioning:
+  scheme: uri-path
+  current: v2
+  detail: All published paths are prefixed /v2/. See lifecycle/fraud-net-lifecycle.yml.
+errors:
+  envelope: '{success, code, source, message}'
+  rfc9457: false
+  detail: errors/fraud-net-problem-types.yml
+rate_limit_signaling:
+  published: false
+  headers: []
+  status_on_exhaustion: null
+  detail: >-
+    No rate limit, quota, burst or throttling response header is documented anywhere in
+    the API documentation or the published contract, and no operation declares a 429.
+    See rate-limits/fraud-net-rate-limits.yml.
+dry_run_mode:
+  supported: false
+  detail: >-
+    No dry-run/simulate parameter is published. The nearest equivalent is the sandbox
+    environment named as the host in the published contract — see
+    sandbox/fraud-net-sandbox.yml.
+events:
+  webhooks: true
+  detail: asyncapi/fraud-net-webhooks.yml

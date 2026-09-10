@@ -1,0 +1,95 @@
+generated: '2026-09-10'
+method: searched
+source: https://releasenotes.fraud.net/
+provider: Fraud.net
+providerId: fraud-net
+url: https://releasenotes.fraud.net/
+title: Fraud.net — Product Updates
+scheme: dated-monthly
+scheme_note: >-
+  No semantic version, no release tag, no per-endpoint API changelog. Entries are monthly
+  product-update posts labelled Announcement / Improvement / Fix. Posts show only a
+  relative age ("a month ago"); no absolute publication date is exposed in the page, so
+  `period` below is the month the post covers, not a published timestamp.
+current_version: v2
+current_version_note: >-
+  The API's own version is the URI-path v2 carried by every published operation. The
+  release notes never mention an API version, and no entry in the visible window
+  describes a change to the Public API contract — this is a platform/product changelog,
+  not an API changelog.
+subscribe: https://releasenotes.fraud.net/ (Subscribe to Updates)
+coverage:
+  earliest_month: '2020-12'
+  latest_month: '2026-08'
+  months_indexed: 52
+  note: >-
+    Taken from the page's own "Jump to Month" index, which runs December 2020 through
+    August 2026 — a six-year continuously maintained changelog.
+entries:
+  - period: '2026-07'
+    title: 'Product Updates: July 2026'
+    labels: [Announcement, Improvement]
+    breaking: false
+    additions:
+      - Merchant Risk Monitoring can now ingest Merchant Detail file feeds (non-transaction merchant data from client-supplied file feeds).
+      - Customer Risk Monitoring launched in early access for Banking, with Customer Entities, Targets & Thresholds, and the Alert & Case Manager experience.
+      - Alert Detail, Case Detail and Entity Detail investigation pages available to Banking clients.
+    api_impact: none-stated
+  - period: '2026-08'
+    title: 'Coming Soon: A Refreshed Alert & Case Manager Experience'
+    labels: [Improvement]
+    breaking: false
+    additions:
+      - Alert Detail page reworked — Create Case and Withdraw actions moved right, Alert Status moved to top-right, record names promoted to page titles.
+    api_impact: none-stated
+  - period: '2026-06'
+    title: 'Product Updates: June 2026'
+    labels: [Improvement, Fix]
+    breaking: false
+    additions:
+      - Transaction monitoring rule counting unique seller IDs per user.
+    fixes:
+      - Case assignment and queue processing issues resolved.
+    api_impact: none-stated
+  - period: '2026-05'
+    title: 'FraudNet Release Notes: May 2026'
+    labels: [Announcement, Improvement]
+    breaking: false
+    additions:
+      - '"Escalated" alert status linking an alert to its associated case.'
+      - Audit tabs on cases and alerts showing a chronological timeline of every action taken.
+    api_impact: none-stated
+  - period: '2026-03'
+    title: 'Product Updates: March 2026'
+    labels: [Improvement]
+    breaking: false
+    additions:
+      - Policy Monitoring enhancements; MCC column on alert discovery; entity information columns on case discovery; unique-seller-ID counting rule.
+    api_impact: none-stated
+  - period: '2026-01'
+    title: 'Product Updates: January 2026'
+    labels: [Improvement, Fix]
+    breaking: false
+    additions:
+      - Major platform upgrade.
+    api_impact: none-stated
+  - period: '2025-12'
+    title: 'Product Updates: December 2025'
+    labels: [Improvement, Fix]
+    breaking: false
+    additions:
+      - Policy Monitoring enhancements.
+    api_impact: none-stated
+  - period: '2025-11'
+    title: 'Policy Monitoring Enhancements: New Targets, Rules, and UI Updates'
+    labels: [Announcement, Improvement]
+    breaking: false
+    api_impact: none-stated
+gaps:
+  - >-
+    No absolute dates. Every entry is stamped with a relative age only, so an agent
+    cannot order or window releases precisely without scraping.
+  - >-
+    No API-level changelog. Six years of platform release notes contain no record of
+    added, changed or removed API operations, fields, or error codes, so a consumer of
+    the Public API has no published way to learn that the contract moved.

@@ -1,0 +1,869 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "API Reference",
+        "description": "The API Reference material consists of four sections:\n\n- **Lists.** For blacklists, whitelists, and watch lists. Not fully documented yet.\n- **Update.** For updating cart and order status\n- **Check.** For checking the fraud score of a cart or order.\n- **Models.** Descriptions of JSON request body data.",
+        "contact": {
+            "url": "https://support.fraud.net/"
+        }
+    },
+    "host": "api-sandbox.c008-m008-us.fraud.net",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/v2/risk/transaction/bank": {
+            "post": {
+                "operationId": "check-transaction-bank",
+                "summary": "Transaction Check",
+                "tags": [
+                    "Banking / Fintech"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/schema-risk-transaction-request-bank"
+                        },
+                        "description": " "
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/request-results"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:responseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:responseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:responseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:responseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:responseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:responseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:responseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:responseApi:504"
+                    }
+                },
+                "x-stoplight": {
+                    "id": "395e4a8yfue3b",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                },
+                "description": "Sends information for a bank transaction and returns a risk score and group so that you can evaluate how to process this transaction.\n\n\n**Note:** The risk group definitions are set using the Fraud.net portal.",
+                "security": [
+                    {
+                        "basic-auth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "x-internal": false
+            },
+            "patch": {
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:updateResponseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:updateResponseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:updateResponseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:updateResponseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:updateResponseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:updateResponseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:updateResponseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:updateResponseApi:504"
+                    }
+                },
+                "summary": "Transaction Update",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Banking / Fintech"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-bank-update-request"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "basic-auth": []
+                    }
+                ],
+                "operationId": "update-bank-transaction"
+            }
+        },
+        "/v2/risk/order/ecommerce": {
+            "post": {
+                "operationId": "POST_v2-risk-order-ecommerce",
+                "summary": "Ecommerce Order Check",
+                "tags": [
+                    "Commerce"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/schema-risk-order-request-ecommerce"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/request-results"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:responseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:responseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:responseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:responseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:responseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:responseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:responseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:responseApi:504"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "basic-auth": []
+                    }
+                ],
+                "description": "Sends information for an eCommerce order and returns a risk score and group so that you can evaluate how to process this order.\n\neCommerce orders are for products or services that your company is selling.\n\n**Note:** The risk group definitions are set using the Fraud.net portal."
+            }
+        },
+        "/v2/risk/order": {
+            "patch": {
+                "operationId": "PATCH_risk-order",
+                "summary": "Order Update",
+                "tags": [
+                    "Commerce"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:updateResponseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:updateResponseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:updateResponseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:updateResponseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:updateResponseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:updateResponseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:updateResponseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:updateResponseApi:504"
+                    }
+                },
+                "x-stoplight": {
+                    "id": "395e4a8yfue3c",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                },
+                "description": "Updates information on an order's status.\n\nThe status of an order can change for several reasons:\n\n* The overall status has changed (new order, approved, fulfilled, etc.)\n* The order has been determined to be fraudulent or not\n* The order payment status has changed (authorized, paid, declined, etc.)\n\nBy updating an order's status, you provide Fraud.net with important information that will be used in determining the risk score of future orders. ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v2/risk/order/marketplace": {
+            "post": {
+                "operationId": "POST_v2-risk-order-marketplace",
+                "summary": "Marketplace Order Check",
+                "tags": [
+                    "Commerce"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/schema-risk-order-request-marketplace"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/request-results"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:responseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:responseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:responseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:responseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:responseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:responseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:responseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:responseApi:504"
+                    }
+                },
+                "x-stoplight": {
+                    "id": "395e4a8yfue3d",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "enabled": false,
+                        "dynamic": false,
+                        "statusCode": 200
+                    }
+                },
+                "description": "Sends information for a marketplace order and returns a risk score and group so that you can evaluate how to process this order.\n\nMarketplace orders are for transactions where users sell to each other.\n\n**Note:** The risk group definitions are set using the Fraud.net portal.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v2/risk/order/check/travel": {
+            "post": {
+                "operationId": "POST_travel-check",
+                "summary": "Travel Order Check",
+                "tags": [
+                    "Commerce"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/schema-risk-order-request-travel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response to Fraud Check",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/request-results"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:responseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:responseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:responseApi:404"
+                    },
+                    "406": {
+                        "description": "Bad Request Format"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:responseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:responseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:responseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:responseApi:504"
+                    }
+                },
+                "x-stoplight": {
+                    "id": "395e4a8yfue3e",
+                    "beforeScript": null,
+                    "afterScript": null,
+                    "public": true,
+                    "mock": {
+                        "statusCode": 200,
+                        "dynamic": false,
+                        "enabled": false
+                    }
+                },
+                "description": "Sends information for a travel order and returns a risk score and group so that you can evaluate how to process this order.\n\nTravel orders are for tickets to travel that your company is selling.\n\n**Note:** The risk group definitions are set using the Fraud.net portal.",
+                "security": [
+                    {
+                        "basic-auth": []
+                    }
+                ]
+            }
+        },
+        "/v2/risk/transaction/account_application": {
+            "post": {
+                "operationId": "POST_v2-transaction-account-application",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "shield.oas2.json#/definitions/schema-application-request"
+                        },
+                        "x-examples": {}
+                    }
+                ],
+                "summary": "Account Application Check",
+                "tags": [
+                    "Identity"
+                ]
+            },
+            "patch": {
+                "operationId": "PATCH_v2-transaction-account-application",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:updateResponseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:updateResponseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:updateResponseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:updateResponseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:updateResponseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:updateResponseApi:500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:updateResponseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:updateResponseApi:504"
+                    }
+                },
+                "summary": "Account Application Update",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "shield.oas2.json#/definitions/application-update-request"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Identity"
+                ]
+            }
+        },
+        "/v2/account/login": {
+            "post": {
+                "operationId": "POST_v2-account-login",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    }
+                },
+                "summary": "Account Login Check",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "shield.oas2.json#/definitions/schema-login-request"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Identity"
+                ]
+            }
+        },
+        "/v2/risk/account/loan": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/request-results"
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Banking / Fintech"
+                ],
+                "summary": "Loan Application Check",
+                "security": [
+                    {
+                        "basic-auth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/schema-risk-request-loan"
+                        }
+                    }
+                ],
+                "operationId": "POST_v2-risk-account-loan"
+            },
+            "patch": {
+                "operationId": "PATCH_v2-risk-account-loan",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:updateResponseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:updateResponseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:updateResponseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:updateResponseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:updateResponseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:updateResponseApi:500"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:updateResponseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:updateResponseApi:504"
+                    }
+                },
+                "summary": "Loan Application Update",
+                "tags": [
+                    "Banking / Fintech"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-loan-update"
+                        }
+                    }
+                ]
+            }
+        },
+        "/v2/risk/transaction/banking_marketplace": {
+            "post": {
+                "summary": "Banking Marketplace Check",
+                "operationId": "post-v2-risk-transaction-banking_marketplace",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/request-results"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:responseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:responseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:responseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:responseApi:406"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:responseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:responseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:responseApi:504"
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/schema-risk-order-request-banking_marketplace"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Banking / Fintech"
+                ]
+            },
+            "patch": {
+                "summary": "Banking Marketplace Update",
+                "operationId": "patch-v2-risk-transaction-banking_marketplace",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-update-result"
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/responses/trait:updateResponseApi:401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/trait:updateResponseApi:403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/trait:updateResponseApi:404"
+                    },
+                    "406": {
+                        "$ref": "#/responses/trait:updateResponseApi:406"
+                    },
+                    "409": {
+                        "$ref": "#/responses/trait:updateResponseApi:409"
+                    },
+                    "500": {
+                        "$ref": "#/responses/trait:updateResponseApi:500"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "$ref": "#/responses/trait:updateResponseApi:503"
+                    },
+                    "504": {
+                        "$ref": "#/responses/trait:updateResponseApi:504"
+                    }
+                },
+                "x-stoplight": {
+                    "id": "ihs0wkmbkeih5"
+                },
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "models.oas2.json#/definitions/base-banking_marketplace-update-request"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Banking / Fintech"
+                ]
+            }
+        }
+    },
+    "responses": {
+        "trait:responseApi:201": {
+            "description": ""
+        },
+        "trait:responseApi:202": {
+            "description": ""
+        },
+        "trait:responseApi:401": {
+            "description": "Unauthorized. Invalid credentials or authorization header."
+        },
+        "trait:responseApi:403": {
+            "description": "Forbidden. You do not have authorization to make this request."
+        },
+        "trait:responseApi:404": {
+            "description": "The specified Request-URI cannot be located. Please verify the accuracy of the URL and ensure it corresponds to an existing resource or endpoint."
+        },
+        "trait:responseApi:406": {
+            "description": "Not Acceptable. Invalid data being passed by the request.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether the action succeeded"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Error code"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Error source"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Error message"
+                    }
+                },
+                "required": [
+                    "success",
+                    "code",
+                    "source"
+                ]
+            }
+        },
+        "trait:responseApi:409": {
+            "description": "Conflict, duplicate order_id, this order is already in our system."
+        },
+        "trait:responseApi:500": {
+            "description": "Internal Server Error. Something went wrong on the server.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Whether the action succeeded"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Error code"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Error source"
+                    },
+                    "message": {
+                        "type": "string",
+                        "default": "Internal Server Error",
+                        "description": "Error message"
+                    }
+                },
+                "required": [
+                    "success",
+                    "code",
+                    "source"
+                ]
+            }
+        },
+        "trait:responseApi:503": {
+            "description": "Service Unavailable"
+        },
+        "trait:responseApi:504": {
+            "description": "Gateway Timeout, please try again."
+        },
+        "trait:updateResponseApi:401": {
+            "description": "Unauthorized. Invalid credentials or authorization header."
+        },
+        "trait:updateResponseApi:403": {
+            "description": "Forbidden. You do not have authorization to make this request."
+        },
+        "trait:updateResponseApi:404": {
+            "description": "The target order_id does not exist in the system."
+        },
+        "trait:updateResponseApi:406": {
+            "description": "Not Acceptable. Invalid data is being passed by the request."
+        },
+        "trait:updateResponseApi:409": {
+            "description": "Conflict, duplicate update, unique check done via order_id and updated_on"
+        },
+        "trait:updateResponseApi:500": {
+            "description": "Internal Server Error. Something went wrong on the server."
+        },
+        "trait:updateResponseApi:503": {
+            "description": "Service Unavailable"
+        },
+        "trait:updateResponseApi:504": {
+            "description": "Gateway Timeout server"
+        }
+    },
+    "securityDefinitions": {
+        "basic-auth": {
+            "type": "basic",
+            "description": "The Authorization field is constructed as follows:\n\n1. The username and password are combined with a single colon. (:). This means that the username itself cannot contain a colon.\n2. The resulting string is encoded into an octet sequence. The character set to use for this encoding is by default unspecified, as long as it is compatible with US-ASCII, but the server may suggest use of UTF-8 by sending the charset parameter.\n3. The resulting string is encoded using a variant of Base64.\n4. The authorization method and a space (e.g. \"Basic \") is then prepended to the encoded string.\n\nFor example, if the browser uses Aladdin as the username and OpenSesame as the password, then the field's value is the base64-encoding of Aladdin:OpenSesame, or QWxhZGRpbjpPcGVuU2VzYW1l. Then the Authorization header will appear as:\n\nAuthorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l"
+        }
+    },
+    "tags": [
+        {
+            "name": "Banking / Fintech"
+        },
+        {
+            "name": "Commerce"
+        },
+        {
+            "name": "Bank"
+        },
+        {
+            "name": "Loan"
+        },
+        {
+            "name": "Identity"
+        }
+    ],
+    "security": [
+        {
+            "new-auth": []
+        }
+    ]
+}

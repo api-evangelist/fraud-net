@@ -1,19 +1,24 @@
-generated: '2026-07-11'
+generated: '2026-09-10'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
-- host: fraud.net
+- host: www.fraud.net
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 20 06:09:56 2026 GMT
+  cert_expires: Nov 17 10:47:28 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: api-docs.fraud.net
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 16 10:02:03 2026 GMT
+  cert_expires: Nov 14 14:36:50 2026 GMT
   hsts: true
   hsts_max_age: 31536000
+- host: api-sandbox.c008-m008-us.fraud.net
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 15 23:59:59 2026 GMT
+  hsts: null
 domains:
 - domain: fraud.net
   dnssec: false
@@ -21,3 +26,13 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: quarantine
+x-correction:
+  field: domains[0].spf
+  corrected_to: true
+  reason: >-
+    The mechanical probe recorded spf:false because the local resolver returned an empty
+    TXT set (repeatable timeout). Verified over DNS-over-HTTPS on 2026-09-10: fraud.net
+    publishes "v=spf1 include:_spf.google.com include:_spf.atlassian.net
+    include:infusionmail.com include:hubspotemail.net
+    include:2113031.spf02.hubspotemail.net ~all".
+  checked: '2026-09-10'

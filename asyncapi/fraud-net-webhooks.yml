@@ -1,0 +1,48 @@
+generated: '2026-09-10'
+method: searched
+source: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+provider: Fraud.net
+providerId: fraud-net
+spec_type: none
+asyncapi_published: false
+asyncapi_note: >-
+  No AsyncAPI document exists. /asyncapi.yaml and /asyncapi.json were not published on
+  any Fraud.net host, the Stoplight project's table of contents contains exactly one
+  http_service and two articles with no event surface, and the github.com/fraudnet
+  organisation holds no event schemas.
+webhooks:
+  documented: true
+  quote: >-
+    "A webhook is a mechanism that allows your system to be automatically notified when a
+    specific event occurs, such as a status update made in the Fraud.net Portal. When an
+    update is made, an HTTP request is sent to the URL you specify, providing relevant
+    status information. This allows your server to react in real-time, such as updating
+    records or triggering workflows."
+  registration:
+    method: portal
+    detail: '"Register the URL you want for your webhook in the Fraud.net portal." There is no API to manage webhook subscriptions.'
+    self_service: true
+    api_managed: false
+  direction: fraud-net -> customer
+  transport: https
+  events: []
+  events_note: >-
+    NO event catalogue is published. The documentation names exactly one trigger by
+    example — "a status update made in the Fraud.net Portal" — and describes the payload
+    only as "relevant status information". There is no event-type list, no payload
+    schema, no signature/verification scheme, no retry or delivery-guarantee statement,
+    and no replay or dead-letter facility documented. This is a webhook surface that
+    exists but is undocumented as a contract.
+  signature_verification: undocumented
+  retries: undocumented
+  payload_schema: undocumented
+relationship_to_api:
+  note: >-
+    The webhook is the inverse of the PATCH Update operations: Update is the customer
+    telling Fraud.net that a record's status changed; the webhook is Fraud.net telling
+    the customer that an analyst changed a status in the portal. Together they close the
+    disposition loop that feeds model retraining.
+gaps:
+  - Publish an event-type catalogue with payload schemas (an AsyncAPI document would carry all of it).
+  - Publish the signature scheme so receivers can verify authenticity.
+  - Expose webhook subscription management through the API rather than the portal only.

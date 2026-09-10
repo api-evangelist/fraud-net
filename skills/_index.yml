@@ -1,0 +1,22 @@
+generated: '2026-09-10'
+method: generated
+source: openapi/fraud-net-public-apis-openapi.json
+provider: Fraud.net
+providerId: fraud-net
+note: >-
+  Generated from the provider's published Swagger 2.0 contract. Every operationId
+  referenced was verified verbatim against openapi/fraud-net-public-apis-openapi.json.
+  Fraud.net publishes no skills or AGENTS.md of its own.
+skills:
+  - file: fraud-net-score-ecommerce-order.md
+    name: Score an ecommerce order and report its outcome
+    api: openapi/fraud-net-public-apis-openapi.json
+    operations: [POST_v2-risk-order-ecommerce, PATCH_risk-order]
+  - file: fraud-net-score-bank-transaction.md
+    name: Score a bank or processor transaction and report its outcome
+    api: openapi/fraud-net-public-apis-openapi.json
+    operations: [check-transaction-bank, update-bank-transaction]
+  - file: fraud-net-screen-identity-events.md
+    name: Screen an account application and its logins
+    api: openapi/fraud-net-public-apis-openapi.json
+    operations: [POST_v2-transaction-account-application, PATCH_v2-transaction-account-application, POST_v2-account-login]

@@ -1,0 +1,112 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/_original/fraud-net-public-apis-oas2-original.json
+docs: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
+provider: Fraud.net
+providerId: fraud-net
+format: custom
+rfc9457: false
+note: >-
+  Fraud.net does NOT use RFC 9457 problem+json. It returns a flat JSON envelope on
+  application/json. Two response traits are defined in the published contract — one for
+  the Check (POST) surface and one for the Update (PATCH) surface — and every operation
+  that declares errors references them, so the catalogue below is the complete published
+  error vocabulary. There is no separate error-code reference page and no error-code
+  registry: `code` and `source` are typed as free-form strings with no published enum.
+envelope:
+  media_type: application/json
+  schema:
+    success: {type: boolean, default: false, required: true, description: Whether the action succeeded}
+    code: {type: string, required: true, description: Error code (no published enumeration)}
+    source: {type: string, required: true, description: Error source (no published enumeration)}
+    message: {type: string, required: false, description: Human-readable error message}
+  observed_on: [406, 500]
+  note: >-
+    Only the 406 and 500 traits carry a response schema in the published contract. The
+    401/403/404/409/503/504 traits are description-only, so the body shape on those
+    statuses is undocumented.
+problems:
+  - status: 401
+    title: Unauthorized
+    detail: Invalid credentials or authorization header.
+    surface: check-and-update
+    remediation: >-
+      Re-check the Basic credential construction (base64 of key:secret) and that the key
+      is the one issued in the Case Management Portal Developer section.
+    source_trait: '#/responses/trait:responseApi:401'
+    operations: 10
+  - status: 403
+    title: Forbidden
+    detail: You do not have authorization to make this request.
+    surface: check-and-update
+    remediation: The key is valid but not entitled to this product surface; contact your Fraud.net representative.
+    source_trait: '#/responses/trait:responseApi:403'
+    operations: 10
+  - status: 404
+    title: Not Found
+    detail: >-
+      Check surface — "The specified Request-URI cannot be located. Please verify the
+      accuracy of the URL and ensure it corresponds to an existing resource or endpoint."
+      Update surface — "The target order_id does not exist in the system."
+    surface: both (different meanings)
+    remediation: >-
+      On an Update, this means the Check that created the order was never accepted; send
+      the Check first. On a Check, the path is wrong.
+    source_trait: '#/responses/trait:responseApi:404 | #/responses/trait:updateResponseApi:404'
+    operations: 10
+  - status: 406
+    title: Not Acceptable
+    detail: Invalid data being passed by the request.
+    surface: check-and-update
+    schema: envelope
+    remediation: Validate the request body against the published definitions; read `code`/`source` in the envelope.
+    source_trait: '#/responses/trait:responseApi:406'
+    operations: 10
+  - status: 409
+    title: Conflict — duplicate
+    detail: >-
+      Check surface — "Conflict, duplicate order_id, this order is already in our system."
+      Update surface — "Conflict, duplicate update, unique check done via order_id and updated_on."
+    surface: both
+    remediation: >-
+      Treat as ALREADY-RECORDED, not as a failure. This is the provider's replay
+      protection: the natural key rejects the duplicate rather than replaying the
+      original response. See conventions/fraud-net-conventions.yml (idempotency).
+    source_trait: '#/responses/trait:responseApi:409 | #/responses/trait:updateResponseApi:409'
+    operations: 9
+  - status: 500
+    title: Internal Server Error
+    detail: Something went wrong on the server.
+    surface: check-and-update
+    schema: envelope
+    remediation: Retryable. See 409 semantics before retrying a write.
+    source_trait: '#/responses/trait:responseApi:500'
+    operations: 10
+  - status: 502
+    title: Bad Gateway
+    detail: Bad Gateway
+    surface: check-and-update
+    remediation: Retryable.
+    source_trait: inline
+    operations: 8
+  - status: 503
+    title: Service Unavailable
+    detail: Service Unavailable
+    surface: check-and-update
+    remediation: Retryable. Check https://status.fraud.net/ — status is reported per region.
+    source_trait: '#/responses/trait:responseApi:503'
+    operations: 10
+  - status: 504
+    title: Gateway Timeout
+    detail: 'Check surface — "Gateway Timeout, please try again." Update surface — "Gateway Timeout server."'
+    surface: check-and-update
+    remediation: Retryable. The API is documented to score in under 100ms, so a 504 is infrastructural.
+    source_trait: '#/responses/trait:responseApi:504'
+    operations: 10
+gaps:
+  - >-
+    Four of the thirteen published operations declare ONLY a 200 or omit 409 entirely —
+    POST_v2-transaction-account-application, POST_v2-account-login, POST_v2-risk-account-loan
+    (200 only) and post-v2-risk-transaction-banking_marketplace (no 409). Those are spec
+    gaps in the provider's own document, not evidence that the errors do not occur.
+  - No published enumeration for the envelope's `code` and `source` fields.

@@ -1,92 +1,35 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+generated: '2026-09-10'
+method: searched
+source: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
 provider: Fraud.net
 providerId: fraud-net
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Fraud
-  - Risk
-  - Commerce
-  - Payments
-  - Security
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Fraud.net API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+limit_count: 0
+description: >-
+  Fraud.net publishes NO rate limits. The API documentation article covers introduction,
+  key concepts, data safety, authentication, update semantics, webhooks and data backfill
+  and never mentions a quota, a burst, a throttle or a 429. The published Swagger 2.0
+  contract declares no 429 response on any of its 13 operations and defines no
+  rate-limit response header. No X-RateLimit-*, RateLimit-* or Retry-After header is
+  documented. This replaces a 2026-05-04 scaffold that asserted 10 req/min, 1,000
+  req/month and a full X-RateLimit-* header set; none of that came from Fraud.net and it
+  has been removed.
+headers: {}
+headers_note: >-
+  None published. An agent has no runtime signal for remaining quota or backoff on this
+  API; the only backoff signal is a 503/504, which the contract does describe.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
+  throttled: null
+  quotaExceeded: null
   serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Fraud.net Public API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Fraud.net Public API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Fraud.net Public API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Fraud.net Public API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Fraud.net Public API
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  gatewayTimeout: 504
+limits: []
+related_performance_signal:
+  field: data.timer
+  detail: >-
+    Every Check response returns `timer`, the milliseconds Fraud.net spent scoring, and
+    the company publishes a "under 100 milliseconds" target. That is a latency signal, not
+    a rate limit, and must not be read as one.
+x-evidence:
+  - {url: 'https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation', http_status: 200, fetched: '2026-09-10', finding: 'no rate limit, quota or throttling section'}
+  - {url: 'https://api-docs.fraud.net/api/v1/projects/cHJqOjk1NTE0/table-of-contents?branch=master', http_status: 200, fetched: '2026-09-10', finding: 'the entire developer portal is 1 service + 2 articles; no rate-limit page exists'}
+  - {source: 'openapi/fraud-net-public-apis-openapi.json', finding: 'no 429 declared on any of 13 operations; no rate-limit header parameter anywhere'}

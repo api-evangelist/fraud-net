@@ -1,0 +1,50 @@
+generated: '2026-09-10'
+method: searched
+probe: true
+source: https://www.fraud.net/trust-center
+url: https://www.fraud.net/trust-center
+provider: Fraud.net
+providerId: fraud-net
+certifications:
+  - SOC 2 Type II
+  - ISO 27001
+  - PCI DSS
+  - HIPAA
+  - GDPR
+  - NIST 800-53
+  - NTIS
+documents:
+  - {name: 'PCI - DSS', access: request, label: 'Get Access'}
+  - {name: SOC2 Type II Attestation Report, access: request, label: 'Get Access'}
+control_families:
+  - Access Control (Zero Trust, MFA, RBAC, least privilege, segregation of duties, MDM)
+  - Awareness & Training (induction + annual, role-specific, secure-coding workshops)
+  - Audit and Accountability (centralized read-only log platform, anomaly monitoring, time sync)
+  - Assessment, Authorization and Monitoring (internal + independent audits, annual penetration testing, continuous vulnerability scanning)
+  - Configuration Management (change management, baselines, peer-reviewed build, IDS)
+  - Contingency Planning (RTO/RPO, daily backups, annual restoration test, quarterly DR test)
+  - Identification and Authentication (SSO/AD, mandatory MFA, NIST 800-63B passwords)
+  - Security Incident Response (IR plans, cross-functional teams, post-incident review)
+  - Maintenance / Media Protection (AWS sanitization + encryption, BYOD policy)
+  - Planning / Personnel Security (regulatory monitoring, background checks, de-provisioning)
+  - Risk Assessment / Secure SDLC / Supply Chain Risk Management
+  - System and Communications Protection (encryption at rest and in transit, TLS 1.2+)
+statements:
+  encryption: >-
+    "Customer data is encrypted at rest and in transit using industry-standard methods
+    (e.g., TLS 1.2+)."
+  hosting: '"We are a 100% cloud-born service provider"; AWS named as the infrastructure provider.'
+evidence:
+  - source: https://www.fraud.net/trust-center
+    http_status: 200
+    fetched: '2026-09-10'
+    keywords: [trust center, soc 2, iso27001, pci dss, hipaa, gdpr, nist 800-53, penetration testing]
+security_contact: null
+vulnerability_disclosure: null
+note: >-
+  The Trust Center is a real, substantive, public compliance page — it names seven
+  frameworks and publishes a control narrative — but it carries NO security contact
+  address and NO responsible-disclosure or bug-bounty channel. The mechanical
+  probe-security-programs.py pass returned trust=none because it looks at
+  trust.<domain>/security.<domain>/<domain>/trust and this page is at /trust-center;
+  this file is the searched upgrade, with the fetched status recorded.

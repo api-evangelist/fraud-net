@@ -1,0 +1,68 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  openapi/fraud-net-public-apis-openapi.json, https://status.fraud.net/,
+  https://releasenotes.fraud.net/
+provider: Fraud.net
+providerId: fraud-net
+versioning:
+  scheme: uri-path
+  current: v2
+  evidence: 'All 13 published operations are prefixed /v2/ (e.g. /v2/risk/order/ecommerce).'
+  policy_url: null
+  policy_published: false
+  note: >-
+    The version is visible in the path but there is no published versioning policy — no
+    statement of how long a major version is supported, how a v3 would be introduced, or
+    whether v1 still runs.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  evidence: >-
+    No Sunset or Deprecation header is documented; RFC 8594 is not referenced; no
+    deprecation, EOL or migration page exists on fraud.net or api-docs.fraud.net.
+  note: NO Deprecation pointer is emitted — the provider publishes no deprecation policy.
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in the published contract carries `deprecated: true`.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment. The status page shows "Uptime over the past 90
+    days" per component but publishes no contractual target. The only published
+    performance claim is "under 100 milliseconds for transaction scoring"
+    (https://www.fraud.net/llms.txt), which the API itself reports back per call in the
+    response's `timer` field.
+status_page: https://status.fraud.net/
+status_page_detail:
+  platform: Atlassian Statuspage
+  http_status: 200
+  fetched: '2026-09-10'
+  granularity: per-region-per-service
+  components: >-
+    Portal, API and Analytics are tracked separately for each regional deployment —
+    Australia, US, Canada, EU, UAE, Bahrain and Singapore.
+  observed_at_probe: >-
+    Most regions Operational; UAE (ME-CENTRAL-1) in Major Outage on Portal and API and
+    Partial Outage on Analytics following an AWS infrastructure incident, with
+    "Fraud-check lookup and calculation - unavailable" and "Portal login - unavailable
+    (Cognito degraded)".
+  history: 90-day uptime history published per component
+changelog: https://releasenotes.fraud.net/
+changelog_detail: changelog/fraud-net-changelog.yml
+support:
+  contact: https://www.fraud.net/company/contact
+  service_desk: https://support.fraud.net/
+  service_desk_note: >-
+    support.fraud.net redirects to an Atlassian service-desk login
+    (fraudnet.atlassian.net/servicedesk) — customer-only, not a public help centre.
+regional_deployment:
+  note: >-
+    The status page and the contract's own host both show that Fraud.net runs
+    per-region, per-cluster deployments (the published contract's host is
+    api-sandbox.c008-m008-us.fraud.net). A consumer's production host is therefore
+    tenant- and region-specific and is not published; see sandbox/fraud-net-sandbox.yml.
+  regions_operated: [Australia, United States, Canada, European Union, UAE, Bahrain, Singapore]

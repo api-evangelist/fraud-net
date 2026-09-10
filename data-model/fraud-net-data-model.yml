@@ -1,0 +1,151 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/fraud-net-public-apis-openapi.json
+provider: Fraud.net
+providerId: fraud-net
+note: >-
+  Derived from the 50 schema definitions in the provider's published contract. Fraud.net's
+  model is NOT a resource graph with server-issued ids — there is no GET, no list, and no
+  entity endpoint. It is a composite request document per risk event: each Check operation
+  submits one nested payload assembled from shared component objects, and each Update
+  operation submits a partial patch keyed on the client's own `order_id`. Relationships
+  below are composition edges inside those documents, not addressable REST resources.
+identity:
+  primary_key: order_id
+  key_owner: client
+  key_note: >-
+    order_id is supplied by the integrator, is the uniqueness key for duplicate detection
+    (409), and is the join between a Check and every later Update. Fraud.net returns it
+    unchanged as `data.id`. There are no Fraud.net-issued, prefixed object ids anywhere in
+    the public contract; the only server-side handle is `data.link`, a URL to the record
+    in the Case Management Portal.
+  secondary_keys:
+    - {field: updated_on, used_for: 'Update uniqueness — the (order_id, updated_on) pair'}
+    - {field: application_id, used_for: account-application and loan-application surfaces}
+    - {field: fingerprint_id, used_for: device correlation across events}
+entities:
+  - name: RiskEvent
+    kind: root
+    variants:
+      - {variant: BankTransaction, schema: Models_Oas2_Schema-risk-transaction-request-bank, operation: check-transaction-bank}
+      - {variant: EcommerceOrder, schema: Models_Oas2_Schema-risk-order-request-ecommerce, operation: POST_v2-risk-order-ecommerce}
+      - {variant: MarketplaceOrder, schema: Models_Oas2_Schema-risk-order-request-marketplace, operation: POST_v2-risk-order-marketplace}
+      - {variant: TravelOrder, schema: Models_Oas2_Schema-risk-order-request-travel, operation: POST_travel-check}
+      - {variant: BankingMarketplace, schema: Models_Oas2_Base-risk-banking_marketplace-request, operation: post-v2-risk-transaction-banking_marketplace}
+      - {variant: AccountApplication, schema: Shield_Oas2_Schema-application-request, operation: POST_v2-transaction-account-application}
+      - {variant: AccountLogin, schema: Shield_Oas2_Schema-login-request, operation: POST_v2-account-login}
+      - {variant: LoanApplication, schema: Models_Oas2_Schema-risk-request-loan, operation: POST_v2-risk-account-loan}
+  - name: Transaction
+    schema: Models_Oas2_Request-order-transaction
+    fields: [order_id, ordered_on, type, order_is_digital, order_total, order_currency, status, event, user_id, order_source, order_count, total_spent, iban]
+  - name: Payment
+    schema: Models_Oas2_Request-payment
+    fields_of_interest: [type, method, bin, avs_result_code, cvv_result_code, 3DS_eci, 3DS_vid, 3DS_xid, emv_aid, emv_chip_id, eci, terminal_type, terminal_method, card_product_type]
+  - name: Device
+    schema: Models_Oas2_Risk-order-request-device / Models_Oas2_Model-device-request
+    fields: [fingerprint_id, data, ip_address, ip_type, user_agent, resolution, service, client_id, session_id, plugin_hash, time_zone, language, is_proxy]
+    produced_by: components/fraud-net-components.yml (Device Fingerprint SDK)
+  - name: Address
+    schema: Models_Oas2_Request-address
+    fields: [address1, address2, city, company, country, email, first_name, last_name, phone, postal_code, region]
+    used_as: [billing, shipping]
+  - name: Seller
+    schema: Models_Oas2_Request-seller
+    fields: [name, company, email, phone, industry, mcc_id, address1, city, region, country, postal_code]
+  - name: Partner
+    schema: Models_Oas2_Request-partner
+  - name: CounterpartyBank
+    schema: Models_Oas2_Request-counterparty_bank
+    fields: [id, name, account_type, mcc_id, tax_id, address1, city, region, country, phone]
+  - name: IntermediaryBank
+    schema: Models_Oas2_Request-intermediary_bank
+    fields: [id, code, code_type, name, address, city, postal_code, region, country]
+  - name: Identity
+    schema: Models_Oas2_Request-identity
+    fields: [type, id, country, region]
+  - name: Application
+    schema: Models_Oas2_Request-application
+    fields: [application_id, created_on, created_by, status, event, source, type]
+  - name: Loan
+    schema: Models_Oas2_Request-loan
+  - name: LoanApplicant
+    schema: Models_Oas2_Request-loan-applicant
+  - name: CreditScore
+    schema: Models_Oas2_Request-credit-score
+    fields: [transunion, equifax, experian]
+  - name: Campaign
+    schema: Models_Oas2_Request-campaign
+    fields: [source, medium, name, term, content]
+  - name: Delivery
+    schema: Models_Oas2_Request-delivery
+    fields: [courier, method, weight]
+  - name: Products
+    schema: Models_Oas2_Risk-order-request-products
+  - name: Promotions
+    schema: Models_Oas2_Request-promotions
+  - name: TravelPassengers
+    schema: Models_Oas2_Request-travel_passengers
+  - name: TravelTicket
+    schema: Models_Oas2_Request-travel_ticket
+  - name: TravelCarrier
+    schema: Models_Oas2_Model-request-travel_carrier
+    fields: [code, name, number]
+  - name: TravelHub
+    schema: Models_Oas2_Model-request-travel_hub
+    fields: [code, name, address, city_region, country, geo]
+  - name: RiskResult
+    schema: Models_Oas2_Request-results
+    fields: [success, data.id, data.timer, data.risk_score, data.risk_group, data.link, data.tags]
+  - name: ResultTag
+    schema: Models_Oas2_Base-order-result-tags
+    fields: [id, action, name, source, type, state, weight, risk_score, risk_group, link]
+  - name: UpdateResult
+    schema: Models_Oas2_Base-update-result
+    fields: [success, data]
+relationships:
+  - {from: RiskEvent, to: Transaction, type: has_one, via: transaction}
+  - {from: RiskEvent, to: Payment, type: has_one, via: payment}
+  - {from: RiskEvent, to: Device, type: has_one, via: device}
+  - {from: RiskEvent, to: Address, type: has_one, via: billing}
+  - {from: RiskEvent, to: Address, type: has_one, via: shipping}
+  - {from: RiskEvent, to: Delivery, type: has_one, via: delivery}
+  - {from: RiskEvent, to: Campaign, type: has_one, via: campaign}
+  - {from: RiskEvent, to: Products, type: has_many, via: products}
+  - {from: RiskEvent, to: Promotions, type: has_many, via: promotions}
+  - {from: RiskEvent, to: Seller, type: has_one, via: seller}
+  - {from: RiskEvent, to: Partner, type: has_one, via: partner}
+  - {from: RiskEvent, to: CounterpartyBank, type: has_one, via: cp}
+  - {from: RiskEvent, to: IntermediaryBank, type: has_one, via: ib}
+  - {from: RiskEvent, to: Identity, type: has_one, via: identity}
+  - {from: RiskEvent, to: Application, type: has_one, via: application}
+  - {from: RiskEvent, to: Loan, type: has_one, via: loan}
+  - {from: RiskEvent, to: LoanApplicant, type: has_one, via: applicant}
+  - {from: LoanApplicant, to: CreditScore, type: has_one, via: credit_source}
+  - {from: TravelTicket, to: TravelCarrier, type: has_many, via: carrier}
+  - {from: TravelTicket, to: TravelHub, type: has_many, via: 'origin / destination'}
+  - {from: RiskEvent, to: TravelPassengers, type: has_many, via: travel_passengers}
+  - {from: RiskEvent, to: RiskResult, type: produces, via: 'HTTP 200 response'}
+  - {from: RiskResult, to: ResultTag, type: has_many, via: data.tags}
+  - {from: Update, to: RiskEvent, type: belongs_to, via: order_id}
+  - {from: Device, to: RiskEvent, type: correlates, via: fingerprint_id}
+update_surfaces:
+  - {schema: Models_Oas2_Base-update, operation: PATCH_risk-order, keyed_on: order_id}
+  - {schema: Models_Oas2_Base-bank-update-request, operation: update-bank-transaction, keyed_on: 'order_id + updated_on'}
+  - {schema: Models_Oas2_Base-banking_marketplace-update-request, operation: patch-v2-risk-transaction-banking_marketplace, keyed_on: 'order_id + updated_on'}
+  - {schema: Models_Oas2_Base-loan-update, operation: PATCH_v2-risk-account-loan, keyed_on: order_id}
+  - {schema: Shield_Oas2_Application-update-request, operation: PATCH_v2-transaction-account-application, keyed_on: order_id}
+shared_field_groups:
+  - {schema: Models_Oas2_Shared_check_update_fields, fields: [agent_code, agent_dept, balance, cancelled_reasons, event, is_fraud, is_fraud_cancel, is_locked, order_id, payment_status, updated_on, status]}
+  - {schema: Models_Oas2_Shared_account_update_fields, fields: [avail_funds, closed_on, credit_limit, is_active, is_fraud, late_status_label, status, pin_change_on, email_change_on, address_change_on, password_change_on, phone_change_on]}
+  - {schema: Models_Oas2_Shared_payment_update_fields, fields: [card_status, is_active, payment_status, auth_code, chargeback_status]}
+  - {schema: Models_Oas2_Shared_seller_update_fields, fields: [country]}
+observations:
+  - >-
+    Two schema namespaces coexist in one document — Models_Oas2_* and Shield_Oas2_*. The
+    Shield_* set backs the identity surface (account application, login) and duplicates
+    the device request object, so the identity product was clearly built on a separate
+    codebase and merged into the same published contract.
+  - >-
+    Four definitions resolve to composition-only nodes with no own properties
+    (Request-payment, Request-account, Schema-risk-order-request-ecommerce and siblings);
+    their fields come entirely from allOf members.

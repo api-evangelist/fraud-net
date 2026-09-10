@@ -1,10 +1,10 @@
-aid: fraud-net:rules
-name: Fraud.net API Operational Rules
+x-aid: fraud-net:rules
+x-name: Fraud.net API Operational Rules
 description: >-
   Operational rules for using the Fraud.net public APIs covering
   authentication, payload completeness, decisioning semantics, and
   post-event update obligations.
-modified: '2026-04-28'
+x-modified: '2026-04-28'
 rules:
   - id: api-key-required
     title: API Key Required

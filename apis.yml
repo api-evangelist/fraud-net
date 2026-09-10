@@ -1,38 +1,44 @@
 aid: fraud-net
 name: Fraud.net
 description: >-
-  Fraud.net provides AI-driven fraud prevention and risk management APIs.
-  The Public API offers pre-authorization Cart Check, Transaction Check,
-  post-event Update, and supporting device, identity, and email risk
-  signals powered by the Collective Intelligence Network.
+  Fraud.net (FraudNet) is an enterprise fraud, risk and compliance platform used by
+  payment processors, acquirers, PSPs, fintechs, banks and digital commerce platforms.
+  Its Public API is a risk-decisioning surface: Check operations submit a transaction,
+  order, loan application, account application or login for real-time scoring, and
+  Update operations relay the eventual outcome (approved, declined, chargeback, fraud
+  disposition) back so the models keep learning. Every Check returns a 0-100 risk score,
+  a risk group and rule tags, drawn from supervised models, anomaly detection and a
+  global anti-fraud network, alongside device fingerprinting, identity, entity screening
+  and AML/KYC-adjacent compliance workflows.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
   commercial: true
-  callable_host: false
+  callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: medium
+  confidence: high
   source:
+  - openapi
   - pricing
-  generated: '2026-08-28'
+  generated: '2026-09-10'
   method: derived
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: enterprise
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Freemium
-  confidence: medium
+  label: Enterprise · contact sales
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-09-10'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fraud-net.png
 access: 3rd-Party
 created: '2024-11-13'
-modified: '2026-04-28'
+modified: '2026-09-10'
 position: Consuming
 tags:
   - Fraud
@@ -40,6 +46,10 @@ tags:
   - Commerce
   - Payments
   - Security
+  - Compliance
+  - Identity
+  - Banking
+  - Machine Learning
 url: >-
   https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/apis.yml
 specificationVersion: '0.23'
@@ -47,37 +57,104 @@ apis:
   - aid: fraud-net:public-api
     name: Fraud.net Public API
     description: >-
-      Public API for evaluating cart and transaction risk pre-authorization
-      and submitting post-event signals for model improvement, plus device,
-      identity, and email risk endpoints.
+      Public API for evaluating cart, order, transaction, loan-application,
+      account-application and login risk in real time, and for submitting
+      post-event Update signals (status, disposition, chargeback, fraud flag)
+      that feed model retraining. Swagger 2.0 contract published by the
+      provider through its Stoplight developer portal; 13 operations across
+      Banking / Fintech, Commerce and Identity.
     humanURL: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+    baseURL: https://api-sandbox.c008-m008-us.fraud.net
     tags:
       - Fraud
       - Risk
       - Cart
       - Transaction
+      - Identity
+      - Banking
     properties:
+      - type: OpenAPI
+        url: openapi/fraud-net-public-apis-openapi.json
       - type: Documentation
         url: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
-      - type: Capabilities
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/capabilities/fraud-net-capabilities.yml
+      - type: APIReference
+        url: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
       - type: Rules
         url: >-
           https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
 common:
-  - type: DomainSecurity
-    url: security/fraud-net-domain-security.yml
+  - type: Website
+    url: https://www.fraud.net/
+  - type: DeveloperPortal
+    url: https://api-docs.fraud.net/
+  - type: Documentation
+    url: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  - type: APIReference
+    url: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
+  - type: GettingStarted
+    url: https://www.fraud.net/onboarding
+  - type: Support
+    url: https://www.fraud.net/company/contact
+  - type: Blog
+    url: https://www.fraud.net/resource-center
   - type: GitHubOrganization
     url: https://github.com/fraudnet
   - type: LinkedIn
     url: https://www.linkedin.com/company/fraud-net
-  - type: Website
-    url: https://fraud.net/
-  - type: Documentation
-    url: https://api-docs.fraud.net/
-  - type: Signup
-    url: https://fraud.net/contact/
+  - type: SignUp
+    url: https://www.fraud.net/demo-request
+  - type: TermsOfService
+    url: https://www.fraud.net/terms-of-service
+  - type: PrivacyPolicy
+    url: https://www.fraud.net/privacy-policy
+  - type: TrustCenter
+    url: https://www.fraud.net/trust-center
+  - type: Compliance
+    url: https://www.fraud.net/trust-center
+  - type: StatusPage
+    url: https://status.fraud.net/
+  - type: ChangeLog
+    url: https://releasenotes.fraud.net/
+  - type: Authentication
+    url: authentication/fraud-net-authentication.yml
+  - type: Conventions
+    url: conventions/fraud-net-conventions.yml
+  - type: Idempotency
+    url: conventions/fraud-net-conventions.yml
+  - type: ErrorCatalog
+    url: errors/fraud-net-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/fraud-net-lifecycle.yml
+  - type: Conformance
+    url: conformance/fraud-net-conformance.yml
+  - type: DataModel
+    url: data-model/fraud-net-data-model.yml
+  - type: Overlay
+    url: overlays/fraud-net-public-apis-overlay.yaml
+  - type: Packages
+    url: packages/fraud-net-packages.yml
+  - type: SDKs
+    url: packages/fraud-net-packages.yml
+  - type: Components
+    url: components/fraud-net-components.yml
+  - type: LLMsTxt
+    url: llms/fraud-net-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Webhooks
+    url: asyncapi/fraud-net-webhooks.yml
+  - type: Sandbox
+    url: sandbox/fraud-net-sandbox.yml
+  - type: DomainSecurity
+    url: security/fraud-net-domain-security.yml
+  - type: ChangeLog
+    url: changelog/fraud-net-changelog.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+
+x-enrichment:
+  date: '2026-09-10'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v3

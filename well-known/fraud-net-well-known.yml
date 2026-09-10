@@ -1,0 +1,124 @@
+generated: '2026-09-10'
+method: probed
+source: live GET of the named /.well-known/ path list on every host this record knows
+provider: Fraud.net
+providerId: fraud-net
+hit_count: 0
+note: >-
+  Nothing was served. Fraud.net's marketing site (Webflow) answers every /.well-known/
+  request with an 88-byte "Invalid .well-known request" page; api.fraud.net and the
+  sandbox host are AWS API Gateway and answer 403 {"message":"Forbidden"} to every
+  anonymous path; api-docs.fraud.net is a Stoplight SPA that returns its 444KB HTML
+  shell with a 404 status; media.fraud.net is an S3 bucket returning NoSuchKey.
+  support.fraud.net is a catch-all: it returned HTTP 200 with the same 218,554-byte
+  Atlassian service-desk login page for EVERY path probed, including the negative
+  control that cannot exist — its soft-404 control FAILED, so none of its 200s is a
+  document and no hit on that host is recorded. NO WellKnown and NO SecurityTxt pointer
+  is emitted: this file records an absence, not a presence.
+  One genuine document WAS found outside /.well-known/ — https://www.fraud.net/llms.txt
+  (HTTP 200, text/plain, 5,902 bytes) — saved to llms/fraud-net-llms.txt and wired as
+  type LLMsTxt.
+soft_404_control:
+  probe: /.well-known/fraud-net-negative-control-7f3ab91c.json
+  fraud.net: {status: 404, bytes: 88, result: pass}
+  www.fraud.net: {status: 404, bytes: 88, result: pass}
+  api.fraud.net: {status: 403, bytes: 23, result: pass}
+  api-docs.fraud.net: {status: 404, bytes: 444895, result: pass}
+  api-sandbox.c008-m008-us.fraud.net: {status: 403, bytes: 23, result: pass}
+  support.fraud.net: {status: 200, bytes: 218552, result: failed}
+  media.fraud.net: {status: 404, bytes: 343, result: pass}
+hosts:
+  - host: https://fraud.net
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+  - host: https://www.fraud.net
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /llms.txt, status: 200, file: ../llms/fraud-net-llms.txt}
+  - host: https://api.fraud.net
+    note: AWS API Gateway; every anonymous path returns 403 {"message":"Forbidden"}
+    documents:
+      - {path: /.well-known/security.txt, status: 403}
+      - {path: /.well-known/openid-configuration, status: 403}
+      - {path: /.well-known/oauth-authorization-server, status: 403}
+      - {path: /.well-known/oauth-protected-resource, status: 403}
+      - {path: /.well-known/api-catalog, status: 403}
+      - {path: /.well-known/ai-plugin.json, status: 403}
+      - {path: /.well-known/agent-card.json, status: 403}
+      - {path: /.well-known/agent.json, status: 403}
+      - {path: /.well-known/aauth-resource.json, status: 403}
+      - {path: /.well-known/apis.json, status: 403}
+      - {path: /apis.json, status: 403}
+  - host: https://api-sandbox.c008-m008-us.fraud.net
+    note: >-
+      The only host named in the provider's published Swagger 2.0 contract.
+      AWS API Gateway; 403 on every anonymous path.
+    documents:
+      - {path: /.well-known/security.txt, status: 403}
+      - {path: /.well-known/openid-configuration, status: 403}
+      - {path: /.well-known/oauth-authorization-server, status: 403}
+      - {path: /.well-known/oauth-protected-resource, status: 403}
+      - {path: /.well-known/api-catalog, status: 403}
+      - {path: /.well-known/agent-card.json, status: 403}
+      - {path: /.well-known/agent.json, status: 403}
+      - {path: /.well-known/aauth-resource.json, status: 403}
+      - {path: /.well-known/apis.json, status: 403}
+      - {path: /apis.json, status: 403}
+  - host: https://api-docs.fraud.net
+    note: Stoplight-hosted SPA; returns a 444KB HTML shell with a 404 status on every path
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://support.fraud.net
+    note: >-
+      CATCH-ALL — soft_404 control FAILED. Returns HTTP 200 with the identical
+      218,554-byte Atlassian service-desk login page for every path, including a
+      negative control that cannot exist. No document recorded.
+    documents:
+      - {path: /.well-known/security.txt, status: 200, file: null}
+      - {path: /.well-known/agent-card.json, status: 200, file: null}
+      - {path: /.well-known/apis.json, status: 200, file: null}
+      - {path: /apis.json, status: 200, file: null}
+  - host: https://media.fraud.net
+    note: S3 origin; NoSuchKey XML on every path
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}

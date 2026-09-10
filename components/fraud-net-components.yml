@@ -1,0 +1,52 @@
+generated: '2026-09-10'
+method: searched
+source: https://api-docs.fraud.net/docs/public-apis/ZG9jOjI3MTE5MDAx-device-fingerprint
+provider: Fraud.net
+providerId: fraud-net
+families:
+  - family: Device Fingerprint SDK
+    kind: client-side-script
+    description: >-
+      A browser-side JavaScript SDK that collects device signals and writes them into a
+      hidden form field, which the integrator then forwards in the `device` object of a
+      Check request. It is the client-side half of the risk API: the documentation states
+      that missing device data significantly degrades signal strength.
+    loader:
+      url: https://media.fraud.net/v0.0.1/fn_device_fingerprint_sdk.js
+      version: 0.0.1
+      global: fn_device_fingerprint_sdk
+      element_id: fndfsid
+      snippet: >-
+        <script>(function(a,b,c,e,d){c[a]=c[a]||[];var g=e.getElementsByTagName(d)[0],
+        f=e.createElement(d);f.async=!0,f.src="https://media.fraud.net/v"+b+"/fn_device_fingerprint_sdk.js?l="+a,
+        f.id="fndfsid",g.parentNode.insertBefore(f,g)})("fn_device_fingerprint_sdk","0.0.1",window,document,"script");</script>
+    install_methods:
+      - {method: google-tag-manager, detail: 'Custom HTML tag, trigger All Pages'}
+      - {method: inline-script, detail: 'paste into <head> on every page where fingerprinting is wanted'}
+      - {method: js-framework, detail: 'React / Angular / other — section headed in the docs but left without instructions'}
+    binding_modes:
+      - {mode: parent_id, call: "fn_device_fingerprint_sdk.push({parent_id: 'example_form_id'})", detail: bind by form HTML id}
+      - {mode: parent_class, call: "fn_device_fingerprint_sdk.push({parent_class: 'example_form_class'})", detail: bind by form HTML class}
+      - {mode: field_id, call: "fn_device_fingerprint_sdk.push({field_id: 'example_field_id'})", detail: write into an existing hidden field by id}
+      - {mode: field_class, call: "fn_device_fingerprint_sdk.push({field_class: 'example_field_class'})", detail: write into an existing hidden field by class}
+    output_field:
+      default_name: device_data
+      override: "field_name option, e.g. {parent_id: 'example_form_id', field_name: 'example_field_name'}"
+      consumed_by: >-
+        The value is sent as device.data on a Check request — see
+        #/definitions/Models_Oas2_Model-device-request (fingerprint_id, data, ip_address,
+        user_agent, ip_type).
+    official: true
+ui_components: []
+embedded_dashboards: []
+note: >-
+  Fraud.net ships exactly one client-side component. There are no embeddable UI widgets,
+  hosted checkout surfaces, or embedded dashboards — investigation happens in the Case
+  Management Portal, which is a full application rather than an embeddable component.
+gaps:
+  - >-
+    The published loader pins version 0.0.1 and the asset's Last-Modified is 2021-01-04.
+    The docs page also carries an unremoved internal editorial note ("Notice: we can
+    create even better readme similar to ...") and an empty "react / angular / other js
+    frameworks" heading, both signs the page has not been revised since it was migrated
+    out of Confluence — the raw HTML is still Confluence-exported markup.

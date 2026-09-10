@@ -1,0 +1,68 @@
+# FraudNet
+
+> FraudNet (or Fraud.net) is an enterprise fraud, risk, and compliance platform used by financial institutions and payment companies. It monitors transactions in real time, screens entities during onboarding, and continuously monitors merchants, businesses, and individuals for emerging fraud, policy violations, and compliance risk.
+
+The platform links transactions, identities, businesses, devices, and other signals into entity profiles so teams can understand behavior over time instead of reacting to single events.
+
+FraudNet serves payment processors, acquirers, PSPs, fintechs, banks, and digital commerce platforms. The platform operates in under 100 milliseconds for transaction scoring and uses AI including supervised models, anomaly detection, and network analysis to identify fraud rings and abnormal behavior.
+
+## Core Solutions
+
+- [Fraud Detection & Prevention](https://www.fraud.net/solutions/fraud-detection-and-prevention): Detect suspicious activity across card, ACH, and digital payments using real-time scoring and behavioral analysis
+- [Transaction Monitoring](https://www.fraud.net/solutions/transaction-monitoring): Monitor live payment traffic and flag risky transactions in under 100ms
+- [Entity Screening](https://www.fraud.net/solutions/entity-screening): Screen new merchants, customers, and businesses during onboarding against sanctions, PEPs, UBOs, adverse media, and watchlists
+- [Entity Monitoring](https://www.fraud.net/solutions/entity-monitoring): Continuously track changes in behavior or risk profile after onboarding
+- [Compliance](https://www.fraud.net/solutions/compliance): Support AML, KYC/KYB, sanctions screening, and regulatory reporting workflows
+- [Enterprise Risk Management Platform](https://www.fraud.net/solutions/enterprise-risk-management-platform): A unified system combining fraud detection, entity risk, and compliance in one platform
+
+## Technology Features
+
+- [AI & Machine Learning](https://www.fraud.net/technology/ai-machine-learning): Uses supervised models, anomaly detection, and network analysis to identify fraud rings and abnormal behavior
+- [Intelligent Risk Decisioning](https://www.fraud.net/technology/intelligent-risk-decisioning): No-code rules combined with risk scores to automate decisions and reduce false positives
+- [Global Anti-Fraud Network](https://www.fraud.net/technology/global-anti-fraud-network): An anonymized network that helps identify fraud patterns seen across multiple organizations
+- [Data Hub](https://www.fraud.net/technology/data-hub): Connects third-party and internal data sources for identity verification and enrichment
+- [Data Orchestration](https://www.fraud.net/technology/data-orchestration): Ingests, transforms, and routes data across fraud and compliance workflows
+- [Case Management & Reporting](https://www.fraud.net/technology/case-management): Investigation tools with workflows, audit trails, and reporting
+- [Advanced Analytics](https://www.fraud.net/technology/advanced-analytics): Dashboards for performance tracking, alert quality, and risk trends
+
+## Industries
+
+- [Payments](https://www.fraud.net/industries/payments): Used by PSPs, acquirers, processors, and cross-border payment companies
+- [Financial Services](https://www.fraud.net/industries/financial-services): Used by banks, credit unions, neobanks, and Banking-as-a-Service providers
+- [Fintech](https://www.fraud.net/industries/fintech): Used by BNPL, embedded finance, and digital lending platforms
+- [Commerce](https://www.fraud.net/industries/commerce): Used by e-commerce, marketplaces, retail, travel, and gaming platforms
+
+## Resources
+
+- [Resource Center](https://www.fraud.net/resource-center): Blog posts, case studies, eBooks, webinars, and fraud research
+- [Fraud Glossary](https://www.fraud.net/glossary): Comprehensive definitions of fraud, risk management, AML, and compliance terminology
+- [Resource Center - Articles](https://www.fraud.net/resource-center?content+type=Articles): Educational content on fraud trends, detection techniques, and best practices
+- [Resource Center - Case Studies](https://www.fraud.net/resource-center?content+type=Case+Studies): Real-world implementation examples showing measurable results
+- [Resource Center - eBooks](https://www.fraud.net/resource-center?content+type=eBooks): In-depth guides on fraud prevention strategies and risk management
+- [Product Release Notes](https://releasenotes.fraud.net/): Latest platform updates and new features
+
+## Example case studies  
+- [Payment Processor Conquers Alert Fatigue with 95% Alert Reduction](https://www.fraud.net/case-studies/payment-processor-conquers-alert-fatigue-with-95-alert-reduction)
+- [Eliminating Fraud and False Positives with FraudNet](https://www.fraud.net/case-studies/fraud-reduction-breakthrough-for-uk-fintech)
+
+## Developer Resources
+
+- [Public API Documentation](https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation): REST API endpoints for integration
+- [Onboarding Guide](https://www.fraud.net/onboarding): Implementation roadmap and getting started resources
+
+## Company Information
+
+- [About FraudNet](https://www.fraud.net/company/about-us): Company mission, vision, and team
+- [Partnerships](https://www.fraud.net/company/partnerships): Technology and data partners
+- [Trust Center](https://www.fraud.net/trust-center): Security certifications, data protection practices, and compliance standards
+- [CSR & ESG Statement](https://www.fraud.net/csr-esg-statement): Corporate social responsibility and environmental commitments
+
+## Optional
+
+- [Terms of Service](https://www.fraud.net/terms-of-service): Legal terms and conditions
+- [Privacy Policy](https://www.fraud.net/privacy-policy): Data privacy practices and policies
+- [Sitemap](https://www.fraud.net/sitemap.xml): Complete site structure and page index
+
+## permissions:
+AI-Training: no
+AI-Indexing: yes
