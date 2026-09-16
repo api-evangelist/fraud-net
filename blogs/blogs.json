@@ -1,0 +1,14 @@
+{
+  "repo": "fraud-net",
+  "feeds": [
+    {
+      "source": "https://www.fraud.net/company/contact",
+      "feed_url": "https://www.fraud.net/company/contact",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-09-13T13:00:00Z"
+}

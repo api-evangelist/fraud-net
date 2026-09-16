@@ -49,39 +49,72 @@ tags:
   - Compliance
   - Identity
   - Banking
+  - Machine-Learning
+tags_raw:
+  - Fraud
+  - Risk
+  - Commerce
+  - Payments
+  - Security
+  - Compliance
+  - Identity
+  - Banking
   - Machine Learning
 url: >-
   https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
-  - aid: fraud-net:public-api
-    name: Fraud.net Public API
-    description: >-
-      Public API for evaluating cart, order, transaction, loan-application,
-      account-application and login risk in real time, and for submitting
-      post-event Update signals (status, disposition, chargeback, fraud flag)
-      that feed model retraining. Swagger 2.0 contract published by the
-      provider through its Stoplight developer portal; 13 operations across
-      Banking / Fintech, Commerce and Identity.
-    humanURL: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
-    baseURL: https://api-sandbox.c008-m008-us.fraud.net
-    tags:
-      - Fraud
-      - Risk
-      - Cart
-      - Transaction
-      - Identity
-      - Banking
-    properties:
-      - type: OpenAPI
-        url: openapi/fraud-net-public-apis-openapi.json
-      - type: Documentation
-        url: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
-      - type: APIReference
-        url: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
-      - type: Rules
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
+- aid: fraud-net:fraud-net-banking-fintech-api
+  name: Fraud.net Banking / Fintech API
+  description: The Banking / Fintech API from Fraud.net — 3 operation(s) for banking / fintech.
+  humanURL: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  baseURL: https://api-sandbox.c008-m008-us.fraud.net
+  tags:
+  - Banking / Fintech
+  properties:
+  - type: OpenAPI
+    url: openapi/fraud-net-banking-fintech-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  - type: APIReference
+    url: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
+- aid: fraud-net:fraud-net-commerce-api
+  name: Fraud.net Commerce API
+  description: The Commerce API from Fraud.net — 4 operation(s) for commerce.
+  humanURL: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  baseURL: https://api-sandbox.c008-m008-us.fraud.net
+  tags:
+  - Commerce
+  properties:
+  - type: OpenAPI
+    url: openapi/fraud-net-commerce-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  - type: APIReference
+    url: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
+- aid: fraud-net:fraud-net-identity-api
+  name: Fraud.net Identity API
+  description: The Identity API from Fraud.net — 2 operation(s) for identity.
+  humanURL: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  baseURL: https://api-sandbox.c008-m008-us.fraud.net
+  tags:
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/fraud-net-identity-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+  - type: APIReference
+    url: https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
 common:
   - type: Website
     url: https://www.fraud.net/
