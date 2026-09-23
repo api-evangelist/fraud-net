@@ -1,0 +1,130 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Reference Identity API
+  description: 'The API Reference material consists of four sections:
+
+
+    - **Lists.** For blacklists, whitelists, and watch lists. Not fully documented yet.
+
+    - **Update.** For updating cart and order status
+
+    - **Check.** For checking the fraud score of a cart or order.
+
+    - **Models.** Descriptions of JSON request body data.'
+  contact:
+    url: https://support.fraud.net/
+servers:
+- url: https://api-sandbox.c008-m008-us.fraud.net
+security:
+- new-auth: []
+tags:
+- name: Identity
+paths:
+  /v2/risk/transaction/account_application:
+    post:
+      operationId: POST_v2-transaction-account-application
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/base-update-result
+      summary: Account Application Check
+      tags:
+      - Identity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: shield.oas2.json#/definitions/schema-application-request
+    patch:
+      operationId: PATCH_v2-transaction-account-application
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/base-update-result
+        '401':
+          $ref: '#/components/responses/trait_updateResponseApi_401'
+        '403':
+          $ref: '#/components/responses/trait_updateResponseApi_403'
+        '404':
+          $ref: '#/components/responses/trait_updateResponseApi_404'
+        '406':
+          $ref: '#/components/responses/trait_updateResponseApi_406'
+        '409':
+          $ref: '#/components/responses/trait_updateResponseApi_409'
+        '500':
+          $ref: '#/components/responses/trait_updateResponseApi_500'
+        '503':
+          $ref: '#/components/responses/trait_updateResponseApi_503'
+        '504':
+          $ref: '#/components/responses/trait_updateResponseApi_504'
+      summary: Account Application Update
+      tags:
+      - Identity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: shield.oas2.json#/definitions/application-update-request
+  /v2/account/login:
+    post:
+      operationId: POST_v2-account-login
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/base-update-result
+      summary: Account Login Check
+      tags:
+      - Identity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: shield.oas2.json#/definitions/schema-login-request
+components:
+  responses:
+    trait_updateResponseApi_504:
+      description: Gateway Timeout server
+    trait_updateResponseApi_401:
+      description: Unauthorized. Invalid credentials or authorization header.
+    trait_updateResponseApi_409:
+      description: Conflict, duplicate update, unique check done via order_id and updated_on
+    trait_updateResponseApi_404:
+      description: The target order_id does not exist in the system.
+    trait_updateResponseApi_406:
+      description: Not Acceptable. Invalid data is being passed by the request.
+    trait_updateResponseApi_403:
+      description: Forbidden. You do not have authorization to make this request.
+    trait_updateResponseApi_503:
+      description: Service Unavailable
+    trait_updateResponseApi_500:
+      description: Internal Server Error. Something went wrong on the server.
+  securitySchemes:
+    basic-auth:
+      type: http
+      scheme: basic
+      description: 'The Authorization field is constructed as follows:
+
+
+        1. The username and password are combined with a single colon. (:). This means that the username itself cannot contain a colon.
+
+        2. The resulting string is encoded into an octet sequence. The character set to use for this encoding is by default unspecified, as long as it is compatible with US-ASCII, but the server may suggest use of UTF-8 by sending the charset parameter.
+
+        3. The resulting string is encoded using a variant of Base64.
+
+        4. The authorization method and a space (e.g. "Basic ") is then prepended to the encoded string.
+
+
+        For example, if the browser uses Aladdin as the username and OpenSesame as the password, then the field''s value is the base64-encoding of Aladdin:OpenSesame, or QWxhZGRpbjpPcGVuU2VzYW1l. Then the Authorization header will appear as:
+
+
+        Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l'

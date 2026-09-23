@@ -1,0 +1,332 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Reference Commerce API
+  description: 'The API Reference material consists of four sections:
+
+
+    - **Lists.** For blacklists, whitelists, and watch lists. Not fully documented yet.
+
+    - **Update.** For updating cart and order status
+
+    - **Check.** For checking the fraud score of a cart or order.
+
+    - **Models.** Descriptions of JSON request body data.'
+  contact:
+    url: https://support.fraud.net/
+servers:
+- url: https://api-sandbox.c008-m008-us.fraud.net
+security:
+- new-auth: []
+tags:
+- name: Commerce
+paths:
+  /v2/risk/order/ecommerce:
+    post:
+      operationId: POST_v2-risk-order-ecommerce
+      summary: Ecommerce Order Check
+      tags:
+      - Commerce
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/request-results
+        '401':
+          $ref: '#/components/responses/trait_responseApi_401'
+        '403':
+          $ref: '#/components/responses/trait_responseApi_403'
+        '404':
+          $ref: '#/components/responses/trait_responseApi_404'
+        '406':
+          $ref: '#/components/responses/trait_responseApi_406'
+        '409':
+          $ref: '#/components/responses/trait_responseApi_409'
+        '500':
+          $ref: '#/components/responses/trait_responseApi_500'
+        '502':
+          description: Bad Gateway
+        '503':
+          $ref: '#/components/responses/trait_responseApi_503'
+        '504':
+          $ref: '#/components/responses/trait_responseApi_504'
+      security:
+      - basic-auth: []
+      description: 'Sends information for an eCommerce order and returns a risk score and group so that you can evaluate how to process this order.
+
+
+        eCommerce orders are for products or services that your company is selling.
+
+
+        **Note:** The risk group definitions are set using the Fraud.net portal.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: models.oas2.json#/definitions/schema-risk-order-request-ecommerce
+  /v2/risk/order:
+    patch:
+      operationId: PATCH_risk-order
+      summary: Order Update
+      tags:
+      - Commerce
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/base-update-result
+        '401':
+          $ref: '#/components/responses/trait_updateResponseApi_401'
+        '403':
+          $ref: '#/components/responses/trait_updateResponseApi_403'
+        '404':
+          $ref: '#/components/responses/trait_updateResponseApi_404'
+        '406':
+          $ref: '#/components/responses/trait_updateResponseApi_406'
+        '409':
+          $ref: '#/components/responses/trait_updateResponseApi_409'
+        '500':
+          $ref: '#/components/responses/trait_updateResponseApi_500'
+        '502':
+          description: Bad Gateway
+        '503':
+          $ref: '#/components/responses/trait_updateResponseApi_503'
+        '504':
+          $ref: '#/components/responses/trait_updateResponseApi_504'
+      x-stoplight:
+        id: 395e4a8yfue3c
+        beforeScript: null
+        afterScript: null
+        public: true
+        mock:
+          enabled: false
+          dynamic: false
+          statusCode: 200
+      description: 'Updates information on an order''s status.
+
+
+        The status of an order can change for several reasons:
+
+
+        * The overall status has changed (new order, approved, fulfilled, etc.)
+
+        * The order has been determined to be fraudulent or not
+
+        * The order payment status has changed (authorized, paid, declined, etc.)
+
+
+        By updating an order''s status, you provide Fraud.net with important information that will be used in determining the risk score of future orders.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: models.oas2.json#/definitions/base-update
+  /v2/risk/order/marketplace:
+    post:
+      operationId: POST_v2-risk-order-marketplace
+      summary: Marketplace Order Check
+      tags:
+      - Commerce
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/request-results
+        '401':
+          $ref: '#/components/responses/trait_responseApi_401'
+        '403':
+          $ref: '#/components/responses/trait_responseApi_403'
+        '404':
+          $ref: '#/components/responses/trait_responseApi_404'
+        '406':
+          $ref: '#/components/responses/trait_responseApi_406'
+        '409':
+          $ref: '#/components/responses/trait_responseApi_409'
+        '500':
+          $ref: '#/components/responses/trait_responseApi_500'
+        '502':
+          description: Bad Gateway
+        '503':
+          $ref: '#/components/responses/trait_responseApi_503'
+        '504':
+          $ref: '#/components/responses/trait_responseApi_504'
+      x-stoplight:
+        id: 395e4a8yfue3d
+        beforeScript: null
+        afterScript: null
+        public: true
+        mock:
+          enabled: false
+          dynamic: false
+          statusCode: 200
+      description: 'Sends information for a marketplace order and returns a risk score and group so that you can evaluate how to process this order.
+
+
+        Marketplace orders are for transactions where users sell to each other.
+
+
+        **Note:** The risk group definitions are set using the Fraud.net portal.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: models.oas2.json#/definitions/schema-risk-order-request-marketplace
+  /v2/risk/order/check/travel:
+    post:
+      operationId: POST_travel-check
+      summary: Travel Order Check
+      tags:
+      - Commerce
+      responses:
+        '200':
+          description: Response to Fraud Check
+          content:
+            application/json:
+              schema:
+                $ref: models.oas2.json#/definitions/request-results
+        '401':
+          $ref: '#/components/responses/trait_responseApi_401'
+        '403':
+          $ref: '#/components/responses/trait_responseApi_403'
+        '404':
+          $ref: '#/components/responses/trait_responseApi_404'
+        '406':
+          description: Bad Request Format
+        '409':
+          $ref: '#/components/responses/trait_responseApi_409'
+        '500':
+          $ref: '#/components/responses/trait_responseApi_500'
+        '502':
+          description: Bad Gateway
+        '503':
+          $ref: '#/components/responses/trait_responseApi_503'
+        '504':
+          $ref: '#/components/responses/trait_responseApi_504'
+      x-stoplight:
+        id: 395e4a8yfue3e
+        beforeScript: null
+        afterScript: null
+        public: true
+        mock:
+          statusCode: 200
+          dynamic: false
+          enabled: false
+      description: 'Sends information for a travel order and returns a risk score and group so that you can evaluate how to process this order.
+
+
+        Travel orders are for tickets to travel that your company is selling.
+
+
+        **Note:** The risk group definitions are set using the Fraud.net portal.'
+      security:
+      - basic-auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: models.oas2.json#/definitions/schema-risk-order-request-travel
+components:
+  responses:
+    trait_updateResponseApi_504:
+      description: Gateway Timeout server
+    trait_responseApi_401:
+      description: Unauthorized. Invalid credentials or authorization header.
+    trait_responseApi_406:
+      description: Not Acceptable. Invalid data being passed by the request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+                description: Whether the action succeeded
+              code:
+                type: string
+                description: Error code
+              source:
+                type: string
+                description: Error source
+              message:
+                type: string
+                description: Error message
+            required:
+            - success
+            - code
+            - source
+    trait_updateResponseApi_401:
+      description: Unauthorized. Invalid credentials or authorization header.
+    trait_updateResponseApi_409:
+      description: Conflict, duplicate update, unique check done via order_id and updated_on
+    trait_responseApi_504:
+      description: Gateway Timeout, please try again.
+    trait_responseApi_500:
+      description: Internal Server Error. Something went wrong on the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+                description: Whether the action succeeded
+              code:
+                type: string
+                description: Error code
+              source:
+                type: string
+                description: Error source
+              message:
+                type: string
+                default: Internal Server Error
+                description: Error message
+            required:
+            - success
+            - code
+            - source
+    trait_updateResponseApi_404:
+      description: The target order_id does not exist in the system.
+    trait_responseApi_409:
+      description: Conflict, duplicate order_id, this order is already in our system.
+    trait_updateResponseApi_406:
+      description: Not Acceptable. Invalid data is being passed by the request.
+    trait_updateResponseApi_403:
+      description: Forbidden. You do not have authorization to make this request.
+    trait_responseApi_403:
+      description: Forbidden. You do not have authorization to make this request.
+    trait_updateResponseApi_503:
+      description: Service Unavailable
+    trait_responseApi_503:
+      description: Service Unavailable
+    trait_updateResponseApi_500:
+      description: Internal Server Error. Something went wrong on the server.
+    trait_responseApi_404:
+      description: The specified Request-URI cannot be located. Please verify the accuracy of the URL and ensure it corresponds to an existing resource or endpoint.
+  securitySchemes:
+    basic-auth:
+      type: http
+      scheme: basic
+      description: 'The Authorization field is constructed as follows:
+
+
+        1. The username and password are combined with a single colon. (:). This means that the username itself cannot contain a colon.
+
+        2. The resulting string is encoded into an octet sequence. The character set to use for this encoding is by default unspecified, as long as it is compatible with US-ASCII, but the server may suggest use of UTF-8 by sending the charset parameter.
+
+        3. The resulting string is encoded using a variant of Base64.
+
+        4. The authorization method and a space (e.g. "Basic ") is then prepended to the encoded string.
+
+
+        For example, if the browser uses Aladdin as the username and OpenSesame as the password, then the field''s value is the base64-encoding of Aladdin:OpenSesame, or QWxhZGRpbjpPcGVuU2VzYW1l. Then the Authorization header will appear as:
+
+
+        Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l'

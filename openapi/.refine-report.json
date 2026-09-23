@@ -1,0 +1,26 @@
+{
+  "provider": "fraud-net",
+  "sources": [
+    "_original/fraud-net-public-apis-oas2-original.json"
+  ],
+  "outputs": [
+    "fraud-net-banking-fintech-api-openapi.yml",
+    "fraud-net-commerce-api-openapi.yml",
+    "fraud-net-identity-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "fraud-net-public-apis-oas2-original.json: upgraded swagger 2.0 -> OpenAPI 3.2.0; renamed 18 component key(s) illegal in 3.x (e.g. trait:responseApi:201)",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/fraud-net-public-apis-openapi.json: archived document superseded by a larger archived document",
+    "fraud-net-banking-fintech-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fraud-net-commerce-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "fraud-net-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
