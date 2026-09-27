@@ -233,40 +233,30 @@ paths:
               $ref: models.oas2.json#/definitions/schema-risk-order-request-travel
 components:
   responses:
-    trait_updateResponseApi_504:
-      description: Gateway Timeout server
+    trait_updateResponseApi_503:
+      description: Service Unavailable
+    trait_responseApi_404:
+      description: The specified Request-URI cannot be located. Please verify the accuracy of the URL and ensure it corresponds to an existing resource or endpoint.
     trait_responseApi_401:
       description: Unauthorized. Invalid credentials or authorization header.
-    trait_responseApi_406:
-      description: Not Acceptable. Invalid data being passed by the request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                default: false
-                description: Whether the action succeeded
-              code:
-                type: string
-                description: Error code
-              source:
-                type: string
-                description: Error source
-              message:
-                type: string
-                description: Error message
-            required:
-            - success
-            - code
-            - source
-    trait_updateResponseApi_401:
-      description: Unauthorized. Invalid credentials or authorization header.
+    trait_responseApi_403:
+      description: Forbidden. You do not have authorization to make this request.
+    trait_updateResponseApi_404:
+      description: The target order_id does not exist in the system.
+    trait_updateResponseApi_500:
+      description: Internal Server Error. Something went wrong on the server.
+    trait_updateResponseApi_504:
+      description: Gateway Timeout server
     trait_updateResponseApi_409:
       description: Conflict, duplicate update, unique check done via order_id and updated_on
+    trait_updateResponseApi_403:
+      description: Forbidden. You do not have authorization to make this request.
+    trait_updateResponseApi_401:
+      description: Unauthorized. Invalid credentials or authorization header.
     trait_responseApi_504:
       description: Gateway Timeout, please try again.
+    trait_updateResponseApi_406:
+      description: Not Acceptable. Invalid data is being passed by the request.
     trait_responseApi_500:
       description: Internal Server Error. Something went wrong on the server.
       content:
@@ -292,24 +282,34 @@ components:
             - success
             - code
             - source
-    trait_updateResponseApi_404:
-      description: The target order_id does not exist in the system.
+    trait_responseApi_406:
+      description: Not Acceptable. Invalid data being passed by the request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+                description: Whether the action succeeded
+              code:
+                type: string
+                description: Error code
+              source:
+                type: string
+                description: Error source
+              message:
+                type: string
+                description: Error message
+            required:
+            - success
+            - code
+            - source
     trait_responseApi_409:
       description: Conflict, duplicate order_id, this order is already in our system.
-    trait_updateResponseApi_406:
-      description: Not Acceptable. Invalid data is being passed by the request.
-    trait_updateResponseApi_403:
-      description: Forbidden. You do not have authorization to make this request.
-    trait_responseApi_403:
-      description: Forbidden. You do not have authorization to make this request.
-    trait_updateResponseApi_503:
-      description: Service Unavailable
     trait_responseApi_503:
       description: Service Unavailable
-    trait_updateResponseApi_500:
-      description: Internal Server Error. Something went wrong on the server.
-    trait_responseApi_404:
-      description: The specified Request-URI cannot be located. Please verify the accuracy of the URL and ensure it corresponds to an existing resource or endpoint.
   securitySchemes:
     basic-auth:
       type: http

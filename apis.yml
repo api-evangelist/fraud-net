@@ -41,15 +41,15 @@ created: '2024-11-13'
 modified: '2026-09-10'
 position: Consuming
 tags:
-  - Fraud
-  - Risk
+  - Fraud Prevention
+  - Risk Management
   - Commerce
   - Payments
   - Security
   - Compliance
   - Identity
   - Banking
-  - Machine-Learning
+  - Machine Learning
 tags_raw:
   - Fraud
   - Risk
@@ -60,6 +60,7 @@ tags_raw:
   - Identity
   - Banking
   - Machine Learning
+  - Machine-Learning
 url: >-
   https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/apis.yml
 specificationVersion: '0.23'
