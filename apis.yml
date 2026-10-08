@@ -120,6 +120,12 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml
 common:
+  - type: Plans
+    url: plans/fraud-net-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/fraud-net-rate-limits.yml
+  - type: FinOps
+    url: finops/fraud-net-finops.yml
   - type: Website
     url: https://www.fraud.net/
   - type: DeveloperPortal
