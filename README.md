@@ -1,4 +1,4 @@
-# Fraud.net (fraud-net)
+# Fraud.net
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,51 +64,145 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Fraud.net provides AI-driven fraud prevention and risk management APIs. The Public API offers pre-authorization Cart Check, Transaction Check, post-event Update, and supporting device, identity, and email risk signals powered by the Collective Intelligence Network.
+Fraud.net (FraudNet) is an enterprise fraud, risk and compliance platform used by payment processors, acquirers, PSPs, fintechs, banks and digital commerce platforms. Its Public API is a risk-decisioning surface: Check operations submit a transaction, order, loan application, account application or login for real-time scoring, and Update operations relay the eventual outcome (approved, declined, chargeback, fraud disposition) back so the models keep learning. Every Check returns a 0-100 risk score, a risk group and rule tags, drawn from supervised models, anomaly detection and a global anti-fraud network, alongside device fingerprinting, identity, entity screening and AML/KYC-adjacent compliance workflows.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/apis.yml)
+**Areas:** Fraud Prevention · Risk Management · Commerce · Payments · Security · Compliance · Identity · Banking · Machine Learning
 
-## Scope
+## Fraud.net on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Fraud.net is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fraud-net/](https://apis.io/providers/fraud-net/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (3)
 
-- Fraud, Risk, Commerce, Payments, Security
+- [Fraud.net Banking / Fintech API](https://apis.io/apis/fraud-net/fraud-net-banking-fintech-api/) — The Banking / Fintech API from Fraud.net — 3 operation(s) for banking / fintech.
+- [Fraud.net Commerce API](https://apis.io/apis/fraud-net/fraud-net-commerce-api/) — The Commerce API from Fraud.net — 4 operation(s) for commerce.
+- [Fraud.net Identity API](https://apis.io/apis/fraud-net/fraud-net-identity-api/) — The Identity API from Fraud.net — 2 operation(s) for identity.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-13
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Fraud.net Public API
+Event-driven and webhook contracts.
 
-Public API for evaluating cart and transaction risk pre-authorization and submitting post-event signals for model improvement, plus device, identity, and email risk endpoints.
+- [Fraud Net Webhooks](https://apis.io/asyncapis/fraud-net/fraud-net-webhooks/)
 
-- **Human URL:** https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Fraud, Risk, Cart, Transaction
+- [fraud-net](https://apis.io/servers/fraud-net/fraud-net/)
 
-#### Properties
+#### Overlays (1)
 
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Fraud Net Public Apis Overlay](https://apis.io/overlays/fraud-net/fraud-net-public-apis-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Fraud.net API Rules](https://apis.io/rules/fraud-net/fraud-net-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Fraud Net Authentication](https://apis.io/security/fraud-net/fraud-net-authentication/)
+- [Fraud Net Domain Security](https://apis.io/security/fraud-net/fraud-net-domain-security/)
+- [Fraud Net Trust Center](https://apis.io/security/fraud-net/fraud-net-trust-center/)
+- [Fraud Net Vulnerability Disclosure](https://apis.io/security/fraud-net/fraud-net-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Fraud Net Plans Pricing](https://apis.io/plans/fraud-net/fraud-net-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Fraud Net Rate Limits](https://apis.io/rate-limits/fraud-net/fraud-net-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Fraud Net Finops](https://apis.io/finops/fraud-net/fraud-net-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.fraud.net/)
 - [Documentation](https://api-docs.fraud.net/docs/public-apis/b2edb775739e6-api-documentation)
-- [Capabilities](https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/capabilities/fraud-net-capabilities.yml)
-- [Rules](https://raw.githubusercontent.com/api-evangelist/fraud-net/refs/heads/main/rules/fraud-net-rules.yml)
+- [Getting started](https://www.fraud.net/onboarding)
+- [API reference](https://api-docs.fraud.net/docs/public-apis/b95a796f3265e-api-reference)
+- [Sign up](https://www.fraud.net/demo-request)
+- [Support](https://www.fraud.net/company/contact)
+- [Changelog](https://releasenotes.fraud.net/)
+- [Blog](https://www.fraud.net/resource-center)
+- [Compliance](https://www.fraud.net/trust-center)
+- [Trust centre](https://www.fraud.net/trust-center)
+- [Terms of service](https://www.fraud.net/terms-of-service)
+- [Privacy policy](https://www.fraud.net/privacy-policy)
+- [GitHub](https://github.com/fraudnet)
+- [Status](https://status.fraud.net/)
 
-## Common Properties
+## API Evangelist rating
 
-- [Website](https://fraud.net/)
-- [Documentation](https://api-docs.fraud.net/)
-- [SignUp](https://fraud.net/contact/)
+**Kin Score 52.6** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 52.6 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 50.0 |
 
-**FN:** Kin Lane
+**Agent readiness 28.7** — agent-ready
 
-**Email:** kin@apievangelist.com
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 37.8** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fraud-net/](https://apis.io/providers/fraud-net/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Fraud.net: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fraud-net/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
